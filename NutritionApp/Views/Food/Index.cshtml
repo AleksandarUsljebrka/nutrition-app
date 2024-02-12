@@ -1,9 +1,9 @@
-﻿
+﻿@model List<Food>
 <div class="container">
 	<div class="row pt-4 pb-3">
 		<div class="col-6">
 			<h2 class="text-primary">
-				Namirnice
+				Food
 			</h2>
 		</div>
 		<div class="col-6 text-end">
@@ -13,10 +13,38 @@
 		</div>
 	</div>
 </div>
-<table>
-	<thead>
-		<tr>
-			<td></td>
-		</tr>
-	</thead>
-</table>
+<div class="container">
+	<div class="row justify-content-center">
+		<div class="col-md-8">
+			<table class="table table-bordered ">
+				<thead class="table-dark">
+					
+					<tr>
+						<th>Name of Food</th>
+						<th>Type of Food</th>
+						<th>Proteins</th>
+						<th>Carbs</th>
+						<th>Fat</th>
+					</tr>
+					
+				</thead>
+				<tbody>
+					@{
+						foreach (var f in Model)
+						{
+
+							<tr>
+								<td>@f.FoodName</td>
+								<td>@f.TypeOfFood</td>
+								<td>@f.Proteins</td>
+								<td>@f.Carbs</td>
+								<td>@f.Fat</td>
+
+							</tr>
+						}
+					}
+				</tbody>
+			</table>
+		</div>
+	</div>
+</div>

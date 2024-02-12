@@ -1,1 +1,60 @@
-﻿<h1>Dodavanje Namirnice</h1>
+﻿@model Food
+<div class="container">
+	<div class="row justify-content-center align-items-center" style="height:100vh;">
+		<div class="col-md-6">
+
+			<form method="post"  class="text-center">
+				<div class="border p-3 mt-4 ">
+					<div class="row pb-2 p-1">
+						<h2 class="text-primary">
+							Add Food
+						</h2>
+						<hr />
+					</div>
+					<div class="row mb-3 p-1">
+						<label asp-for="FoodName" class="form-label"></label>
+						<input asp-for="FoodName" type="text" class="form-control" />
+					</div>
+					<div class="row mb-3 p-1">
+						<label asp-for="TypeOfFood" class="form-label"></label>
+						<select  asp-for="TypeOfFood" class="form-select" >
+							<option class="selectpicker" value="meatFishEggs">Meat Fish and Eggs</option>
+							<option class="selectpicker" value="dairy">Dairy product</option>
+							<option class="selectpicker" value="fruit">Fruits</option>
+							<option class="selectpicker" value="vegetables">Vegetables</option>
+							<option class="selectpicker" value="grains">Grains</option>
+							<option class="selectpicker" value="legumes">Legumes</option>
+							<option class="selectpicker" value="nuts">Nuts and Seeds</option>
+							<option class="selectpicker" value="oils">Oils and fats</option>
+							<option class="selectpicker" value="sweets">Sweets and snacks</option>
+							<option class="selectpicker" value="beverages">Beverages</option>
+						</select>
+					</div>
+					<div class="row mb-3 p-1">
+						<label asp-for="Proteins" class="form-label"></label>
+						<input asp-for="Proteins" type="number" min="0" class="form-control" />
+					</div>
+					<div class="row mb-3 p-1">
+						<label asp-for="Carbs" class="form-label"></label>
+						<input asp-for="Carbs" type="number" min="0" class="form-control" />
+					</div>
+					<div class="row mb-3 p-1">
+						<label asp-for="Fat" class="form-label"></label>
+						<input asp-for="Fat"  type="number" min="0" class="form-control" />
+					</div>
+					<div class="row justify-content-center">
+						<div class="col-6 ">
+							<button type="submit" class="btn btn-primary form-control">Add</button>
+
+						</div>
+						<div class="col-6 ">
+
+							<a asp-controller="Food" asp-action="Index" class="btn btn-outline-secondary border form-control">Back to Food Table</a>
+						</div>
+					</div>
+
+				</div>
+			</form>
+		</div>
+	</div>
+</div>

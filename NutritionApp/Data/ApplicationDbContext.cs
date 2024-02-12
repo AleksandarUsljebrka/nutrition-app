@@ -1,4 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore;
+using NutritionApp.Models;
 
 namespace NutritionApp.Data
 {
@@ -8,5 +9,6 @@ namespace NutritionApp.Data
         {
                 
         }
+        public DbSet<Food> Food { get; set; }
     }
 }
