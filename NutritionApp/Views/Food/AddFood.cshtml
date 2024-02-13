@@ -13,7 +13,8 @@
 					</div>
 					<div class="row mb-3 p-1">
 						<label asp-for="FoodName" class="form-label"></label>
-						<input asp-for="FoodName" type="text" class="form-control" />
+						<input asp-for="FoodName"  type="text" class="form-control" />
+						<span asp-validation-for="FoodName" class="text-danger"></span>
 					</div>
 					<div class="row mb-3 p-1">
 						<label asp-for="TypeOfFood" class="form-label"></label>
@@ -25,22 +26,28 @@
 							<option class="selectpicker" value="grains">Grains</option>
 							<option class="selectpicker" value="legumes">Legumes</option>
 							<option class="selectpicker" value="nuts">Nuts and Seeds</option>
-							<option class="selectpicker" value="oils">Oils and fats</option>
-							<option class="selectpicker" value="sweets">Sweets and snacks</option>
+							<option class="selectpicker" value="oils">Oils and Fats</option>
+							<option class="selectpicker" value="sweets">Sweets and Snacks</option>
 							<option class="selectpicker" value="beverages">Beverages</option>
 						</select>
 					</div>
 					<div class="row mb-3 p-1">
 						<label asp-for="Proteins" class="form-label"></label>
 						<input asp-for="Proteins" type="number" min="0" class="form-control" />
+						<span asp-validation-for="Proteins" class="text-danger"></span>
+
 					</div>
 					<div class="row mb-3 p-1">
 						<label asp-for="Carbs" class="form-label"></label>
 						<input asp-for="Carbs" type="number" min="0" class="form-control" />
+						<span asp-validation-for="Carbs" class="text-danger"></span>
+
 					</div>
 					<div class="row mb-3 p-1">
 						<label asp-for="Fat" class="form-label"></label>
 						<input asp-for="Fat"  type="number" min="0" class="form-control" />
+						<span asp-validation-for="Fat" class="text-danger"></span>
+
 					</div>
 					<div class="row justify-content-center">
 						<div class="col-6 ">
