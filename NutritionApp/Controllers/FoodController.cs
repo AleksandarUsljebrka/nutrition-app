@@ -1,9 +1,11 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using NutritionApp.Data;
 using NutritionApp.Models;
 
 namespace NutritionApp.Controllers
 {
+	[Authorize]
 	public class FoodController : Controller
 	{
 		private ApplicationDbContext _context;

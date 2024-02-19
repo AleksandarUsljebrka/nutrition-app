@@ -3,6 +3,7 @@ using System.ComponentModel.DataAnnotations;
 
 namespace NutritionApp.Models
 {
+    
     public class Food
     {
         [Key] 
