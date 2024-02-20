@@ -19,6 +19,7 @@ namespace NutritionApp.Controllers
 			return View(foods);
 		}
 
+
 		public IActionResult AddFood()
 		{
 			return View();
@@ -56,5 +57,20 @@ namespace NutritionApp.Controllers
 			}
 			return View();
 		}
+
+		public IActionResult EditFood(int? id)
+		{
+			if (id == null || id == 0)
+			{
+				return NotFound();
+			}
+			Food dbFood = _context.Food.Find(id);
+			if (dbFood == null )
+			{
+				return NotFound();
+			}
+			return View(dbFood);
+		}
+
 	}
 }

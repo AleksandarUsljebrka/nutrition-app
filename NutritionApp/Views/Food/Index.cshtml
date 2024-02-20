@@ -7,16 +7,21 @@
 			</h2>
 		</div>
 		<div class="col-6 text-end">
-			<a asp-controller="Food" asp-action="AddFood" class="btn btn-primary">
-				<i class="bi bi-plus-square"></i> Dodaj Namirnicu
-			</a>
+			@{
+				if (User.IsInRole("Admin"))
+				{
+					<a asp-controller="Food" asp-action="AddFood" class="btn btn-primary">
+						<i class="bi bi-plus-square"></i> New Food
+					</a>
+				}
+			}
 		</div>
 	</div>
 </div>
 <div class="container">
 	<div class="row justify-content-center">
-		<div class="col-md-8">
-			<table class="table table-bordered ">
+		<div class="col-md-8 text-center table-responsive">
+			<table class="table text-light table-secondary">
 				<thead class="table-dark">
 					
 					<tr>
@@ -25,11 +30,11 @@
 						<th>Proteins</th>
 						<th>Carbs</th>
 						<th>Fat</th>
-						<th></th>
+						<th>Action</th>
 					</tr>
 					
 				</thead>
-				<tbody>
+				<tbody >
 					@{
 						foreach (var f in Model)
 						{
@@ -40,8 +45,22 @@
 								<td>@f.Proteins</td>
 								<td>@f.Carbs</td>
 								<td>@f.Fat</td>
-								<td>
-									
+								<td class="w-25 text-center justify-content-center">
+									@{
+										if (User.IsInRole("Admin"))
+										{
+											
+												<div class=" w-75 text-center justify-content-center" role="group">
+													<a asp-controller="Food" asp-action="EditFood" asp-route-foodId="@f.Id" class="btn-primary btn w-75 mx-2">
+														<i class="bi bi-pencil-square"></i> Edit
+													</a>
+													<a asp-controller="Food" asp-action="DeleteFood" class="btn btn-danger w-75 mx-2">
+														<i class="bi bi-trash"></i> Delete
+													</a>
+												</div>
+											
+										}
+									}			
 								</td>
 							</tr>
 						}
