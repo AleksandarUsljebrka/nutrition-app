@@ -1,25 +1,25 @@
 ﻿@model Food
-<div class="container ">
+<div class="container">
 	<div class="row justify-content-center align-items-center" style="height:100vh;">
-		<div class=" col-md-6">
+		<div class="col-md-6">
 
-			<form method="post" class="text-center ">
-				<div class="card  p-3 mt-4 ">
+			<form method="post" class="text-center">
+				<input asp-for="Id" hidden />
+				<div class="card p-3 mt-4 ">
 					<div class="row card-header bg-secondary bg-gradient pb-2 p-1">
 						<h2 class="text-info">
-							Add Food
+							Delete Food
 						</h2>
 						<hr />
 					</div>
-
-					<div class="form-floating py-2 col-12">
-						<input asp-for="FoodName" type="text" class="text-center border-0 shadow form-control" />
-						<label asp-for="FoodName" class="form-label text-dark ms-4"></label>
-						<span asp-validation-for="FoodName" class="text-danger"></span>
+					<div class=" mb-3 p-1">
+						<label asp-for="FoodName" class="form-label"></label>
+						<input asp-for="FoodName" type="text" disabled class="form-control text-center" />
+			
 					</div>
 					<div class="row mb-3 p-1">
 						<label asp-for="TypeOfFood" class="form-label"></label>
-						<select asp-for="TypeOfFood" class="form-select">
+						<select asp-for="TypeOfFood" disabled  class="form-select">
 							<option class="selectpicker" value="Meat Fish and Eggs">Meat Fish and Eggs</option>
 							<option class="selectpicker" value="Dairy product">Dairy product</option>
 							<option class="selectpicker" value="Fruits">Fruits</option>
@@ -34,25 +34,25 @@
 					</div>
 					<div class="row mb-3 p-1">
 						<label asp-for="Proteins" class="form-label"></label>
-						<input asp-for="Proteins" type="number" min="0" class="text-center form-control" />
-						<span asp-validation-for="Proteins" class="text-danger"></span>
+						<input asp-for="Proteins" type="number" disabled min="0" class="text-center form-control" />
+				
 
 					</div>
 					<div class="row mb-3 p-1">
 						<label asp-for="Carbs" class="form-label"></label>
-						<input asp-for="Carbs" type="number" min="0" class="text-center form-control" />
-						<span asp-validation-for="Carbs" class="text-danger"></span>
+						<input asp-for="Carbs" type="number"  disabled min="0" class="text-center form-control" />
+				
 
 					</div>
 					<div class="row mb-3 p-1">
 						<label asp-for="Fat" class="form-label"></label>
-						<input asp-for="Fat" type="number" min="0" class="text-center form-control" />
-						<span asp-validation-for="Fat" class="text-danger"></span>
+						<input asp-for="Fat" type="number"  disabled min="0" class="text-center form-control" />
+						
 
 					</div>
 					<div class="row justify-content-center">
 						<div class="col-6 ">
-							<button type="submit" class="btn btn-primary form-control">Add</button>
+							<button type="submit" class="btn btn-primary form-control">Delete</button>
 
 						</div>
 						<div class="col-6 ">
@@ -66,8 +66,3 @@
 		</div>
 	</div>
 </div>
-@section Scripts {
-	@{
-		<partial name="_ValidationScriptsPartial" />
-	}
-}

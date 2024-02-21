@@ -22,9 +22,9 @@
 	<div class="row justify-content-center">
 		<div class="col-md-8 text-center table-responsive">
 			<table class="table text-light table-secondary">
-				<thead class="table-dark">
+				<thead class="table-primary">
 					
-					<tr>
+					<tr >
 						<th>Name of Food</th>
 						<th>Type of Food</th>
 						<th>Proteins</th>
@@ -54,7 +54,7 @@
 													<a asp-controller="Food" asp-action="EditFood" asp-route-foodId="@f.Id" class="btn-primary btn w-75 mx-2">
 														<i class="bi bi-pencil-square"></i> Edit
 													</a>
-													<a asp-controller="Food" asp-action="DeleteFood" class="btn btn-danger w-75 mx-2">
+												<a asp-controller="Food" asp-action="DeleteFood" asp-route-foodId="@f.Id" class="btn btn-danger w-75 mx-2">
 														<i class="bi bi-trash"></i> Delete
 													</a>
 												</div>

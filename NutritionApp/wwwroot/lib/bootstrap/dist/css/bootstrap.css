@@ -27654,3 +27654,10 @@ textarea.form-control-lg {
     --bs-tooltip-bg: var(--bs-tertiary-bg);
     --bs-tooltip-color: var(--bs-emphasis-color);
 }
+select {
+    text-align-last: center;
+}
+
+.selectpicker {
+    text-align: center;
+}
