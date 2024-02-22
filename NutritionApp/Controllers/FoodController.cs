@@ -1,21 +1,25 @@
 ﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using NutritionApp.BusinessLogic.Services.Interfaces;
 using NutritionApp.Data;
+using NutritionApp.Data.Data;
+using NutritionApp.Data.Repository.IRepository;
+using NutritionApp.Data.Repository.UnitOfWork;
 using NutritionApp.Models;
 
 namespace NutritionApp.Controllers
 {
-	[Authorize]
+    [Authorize]
 	public class FoodController : Controller
 	{
-		private ApplicationDbContext _context;
-		public FoodController(ApplicationDbContext context)
+		private readonly IFoodService _foodService;
+		public FoodController(IFoodService foodService)
 		{
-			_context = context;
+			_foodService = foodService;
 		}
 		public IActionResult Index()
 		{
-			List<Food> foods = _context.Food.ToList();
+			List<Food> foods = _foodService.GetAllFood();
 			return View(foods);
 		}
 
@@ -30,10 +34,7 @@ namespace NutritionApp.Controllers
 		{
 			if (ModelState.IsValid)
 			{
-				//newFood.TypeOfFood = MappValue(newFood.TypeOfFood);
-
-				_context.Food.Add(newFood);
-				_context.SaveChanges();
+				_foodService.AddFood(newFood);
 				TempData["success"] = "Food added successfully!";
 
 				return RedirectToAction("Index");
@@ -47,7 +48,9 @@ namespace NutritionApp.Controllers
 			{
 				return NotFound();
 			}
-			Food? dbFood = _context.Food.Find(foodId);
+
+			Food? dbFood = _foodService.GetFood(foodId);
+
 			if (dbFood == null)
 			{
 				return NotFound();
@@ -61,8 +64,7 @@ namespace NutritionApp.Controllers
 
 			if (ModelState.IsValid)
 			{
-				_context.Food.Update(editedFood);
-				_context.SaveChanges();
+				_foodService.UpdateFood(editedFood);
 				TempData["success"] = "Food updated successfully!";
 
 				return RedirectToAction("Index");
@@ -76,7 +78,7 @@ namespace NutritionApp.Controllers
 			{
 				return NotFound();
 			}
-			Food? dbFood = _context.Food.Find(foodId);
+			Food? dbFood = _foodService.GetFood(foodId);
 			if (dbFood == null)
 			{
 				return NotFound();
@@ -87,13 +89,16 @@ namespace NutritionApp.Controllers
 		[HttpPost,ActionName("DeleteFood")]
 		public IActionResult DeleteFoodPOST(int? id)
 		{
-			Food? dbFood = _context.Food.Find(id);
+			Food? dbFood = _foodService.GetFood(id);
 			if(dbFood == null)
 			{
+				TempData["error"] = "Error during removing food!";
+
 				return NotFound();
 			}
-			_context.Food.Remove(dbFood);
-			_context.SaveChanges();
+
+			_foodService.DeleteFood(dbFood);
+
 			TempData["success"] = "Food deleted successfully!"; 
 			return RedirectToAction("Index");
 

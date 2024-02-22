@@ -1,11 +1,11 @@
 ﻿using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using NutritionApp.Models;
-using NutritionApp.ViewModels;
+using NutritionApp.Models.AuthModels;
 
 namespace NutritionApp.Controllers
 {
-	public class UserController : Controller
+    public class UserController : Controller
 	{
 		private readonly SignInManager<User> signInManager;
 		private readonly UserManager<User> userManager;

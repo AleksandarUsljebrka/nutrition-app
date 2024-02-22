@@ -3,7 +3,7 @@ using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 using NutritionApp.Models;
 
-namespace NutritionApp.Data
+namespace NutritionApp.Data.Data
 {
     public class ApplicationDbContext:IdentityDbContext<User> 
     {

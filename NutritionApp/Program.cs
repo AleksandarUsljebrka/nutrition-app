@@ -1,6 +1,12 @@
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
+using NutritionApp.BusinessLogic.Services;
+using NutritionApp.BusinessLogic.Services.Interfaces;
 using NutritionApp.Data;
+using NutritionApp.Data.Data;
+using NutritionApp.Data.Repository;
+using NutritionApp.Data.Repository.IRepository;
+using NutritionApp.Data.Repository.UnitOfWork;
 using NutritionApp.Models;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -20,6 +26,11 @@ builder.Services.AddIdentity<User, IdentityRole>(
     }
     ).AddEntityFrameworkStores<ApplicationDbContext>().AddDefaultTokenProviders();
 
+builder.Services.AddScoped<IUnitOfWork, UnitOfWork>();
+builder.Services.AddScoped<IFoodRepository, FoodRepository>();
+builder.Services.AddScoped<IFoodService, FoodService>();
+
+
 
 var app = builder.Build();
 
@@ -35,7 +46,7 @@ app.UseHttpsRedirection();
 app.UseStaticFiles();
 
 app.UseRouting();
-
+app.UseAuthentication();
 app.UseAuthorization();
 
 app.MapControllerRoute(
