@@ -22,9 +22,10 @@ namespace NutritionApp.Models
         public float Proteins { get; set; }
         [Required(ErrorMessage = "This field is required!")]
         public float Carbs { get; set; }
-        [Required(ErrorMessage = "This field is required!")]
 
+        [Required(ErrorMessage = "This field is required!")]
         public float Fat { get; set; }
 
+        public ICollection<FoodInDiary> FoodInDiaries { get; set; }
     }
 }

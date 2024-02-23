@@ -57,8 +57,17 @@
 												<a asp-controller="Food" asp-action="DeleteFood" asp-route-foodId="@f.Id" class="btn btn-danger w-75 mx-2">
 														<i class="bi bi-trash"></i> Delete
 													</a>
-												</div>
-											
+											</div>
+
+										}
+										if (User.IsInRole("User"))
+										{
+											<div class=" w-75 text-center justify-content-center" role="group">
+												<a asp-controller="Diary" asp-action="AddToDiary" asp-route-foodId="@f.Id" class="btn-primary btn w-75 mx-2">
+													<i class="bi bi-plus-square"></i> Add To Diary
+												</a>
+												
+											</div>
 										}
 									}			
 								</td>

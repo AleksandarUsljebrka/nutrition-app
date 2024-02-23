@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
+using NutritionApp.BusinessLogic.Services.Interfaces;
 using NutritionApp.Models;
 using NutritionApp.Models.AuthModels;
 
@@ -9,10 +10,12 @@ namespace NutritionApp.Controllers
 	{
 		private readonly SignInManager<User> signInManager;
 		private readonly UserManager<User> userManager;
-        public UserController( SignInManager<User> signInManager, UserManager<User> userManager)
+		private readonly IUserService _userService;
+        public UserController( SignInManager<User> signInManager, UserManager<User> userManager, IUserService userService)
         {
             this.signInManager = signInManager;
 			this.userManager = userManager;
+			this._userService = userService;
 		}
         public IActionResult Login()
 		{
@@ -71,5 +74,7 @@ namespace NutritionApp.Controllers
 			await signInManager.SignOutAsync();
 			return RedirectToAction("Login");
 		}
+
+	
 	}
 }

@@ -10,6 +10,7 @@ namespace NutritionApp.Data.Repository.UnitOfWork
 	public interface IUnitOfWork
 	{
 		public IFoodRepository FoodRepository { get; set; }
+		public IUserRepository UserRepository { get; set; }
 		public void SaveChanges();
 	}
 }
