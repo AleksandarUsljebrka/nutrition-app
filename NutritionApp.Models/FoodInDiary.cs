@@ -11,6 +11,7 @@ namespace NutritionApp.Models
 	{
 		[Key]
 		public int Id {  get; set; }
+		public float Grams { get; set; }
 		public string FoodName { get; set; }
 		public string TypeOfFood { get; set; }
 		public float Proteins { get; set; }

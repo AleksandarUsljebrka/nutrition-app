@@ -16,10 +16,13 @@ namespace NutritionApp.Data.Repository.UnitOfWork
 			_context = context;
 			FoodRepository = new FoodRepository(_context);
 			UserRepository = new UserRepository(_context);
-
+			UserDiaryRepository = new UserDiaryRepository(_context);	
+			FoodInDiaryRepository = new FoodInDiaryRepository(_context);
 		}
 		public IFoodRepository FoodRepository { get; set; }
 		public IUserRepository UserRepository { get; set; }
+		public IUserDiaryRepository UserDiaryRepository { get; set; }
+		public IFoodInDiaryRepository FoodInDiaryRepository { get; set; }
 
 		public void SaveChanges()
 		{

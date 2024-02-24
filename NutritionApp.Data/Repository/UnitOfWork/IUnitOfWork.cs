@@ -11,6 +11,9 @@ namespace NutritionApp.Data.Repository.UnitOfWork
 	{
 		public IFoodRepository FoodRepository { get; set; }
 		public IUserRepository UserRepository { get; set; }
+		public IUserDiaryRepository UserDiaryRepository { get; set; }
+		public IFoodInDiaryRepository FoodInDiaryRepository { get; set; }
+
 		public void SaveChanges();
 	}
 }

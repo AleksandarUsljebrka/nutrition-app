@@ -18,7 +18,7 @@ namespace NutritionApp.Models
 		public float? CarbsSummary { get; set; }
 		public float? FatSummary { get; set; }
 		public User User { get; set; }
-		public int UserForeignKeyId { get; set; }
+		public string UserForeignKeyId { get; set; }
 		public ICollection<FoodInDiary>? DailyFood { get; set; }
 
 	}

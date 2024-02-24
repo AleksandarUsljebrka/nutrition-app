@@ -1,1 +1,53 @@
-﻿<h3>Here is your today's diary!</h3>
+﻿@model UserDiary
+
+<div class="container">
+	<div class="row justify-content-center">
+		<div class="col-md-8 text-center table-responsive">
+			@{if(Model != null)
+			{
+				<table class="table text-light table-secondary">
+				<thead class="table-primary">
+
+					<tr>
+						<th>Date</th>
+						<th>Today's Calories</th>
+						<th>Today's Proteins</th>
+						<th>Today's Carbs</th>
+						<th>Today's Fat</th>
+						<th>Today's Food List</th>
+					</tr>
+
+				</thead>
+				<tbody>
+					
+
+							<tr>
+								<td>@Model.DiaryDate</td>
+								<td>@Model.CaloriesSummary</td>
+								<td>@Model.ProteinsSummary</td>
+								<td>@Model.CarbsSummary</td>
+								<td>@Model.FatSummary</td>
+								<td class="w-25 text-center justify-content-center">
+
+
+									<div class=" w-75 text-center justify-content-center" role="group">
+										<a asp-controller="Diary" asp-action="FoodDetails" asp-route-foodId="@Model.Id" class="btn-primary btn w-75 mx-2">
+											<i class="bi bi-plus-square"></i> Food Details
+										</a>
+
+									</div>
+
+							</tr>
+						
+					
+				</tbody>
+					</table>
+				}
+				else
+				{
+					<h3>@ViewBag.NotFound</h3>
+				}
+		}
+		</div>
+	</div>
+</div>
