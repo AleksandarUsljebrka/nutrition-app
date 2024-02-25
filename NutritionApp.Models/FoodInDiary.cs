@@ -17,6 +17,7 @@ namespace NutritionApp.Models
 		public float Proteins { get; set; }
 		public float Carbs { get; set; }
 		public float Fat { get; set; }
+		public float Calories { get; set; }
 		public int UserDiaryId { get; set; }
 		public UserDiary? UserDiary { get; set; }
 		public Food Food { get; set; }	

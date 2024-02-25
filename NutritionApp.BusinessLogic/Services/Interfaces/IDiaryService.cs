@@ -11,5 +11,10 @@ namespace NutritionApp.BusinessLogic.Services.Interfaces
 	{
 		public void Add(int? foodId, float grams);
 		public UserDiary GetDiary();
+		public FoodInDiary GetFoodInDiary(int? foodId);
+		public bool DeleteFoodFromDiary(int? foodId);
+		public bool UpdateFoodFromDiary(int? foodId, float editedGrams);
+
+
 	}
 }
