@@ -25,15 +25,15 @@
 						<span asp-validation-for="Proteins" class="text-danger"></span>
 
 					</div>
-					
+
 					<div class="row justify-content-center">
 						<div class="col-6 ">
 							<button type="submit" class="btn btn-primary form-control">Save</button>
 
 						</div>
 						<div class="col-6 ">
-
-							<a asp-controller="Diary" asp-action="Index" class="btn btn-outline-secondary border form-control">Back to Food Table</a>
+							
+							<a asp-controller="Diary" asp-action="DiaryDetails" asp-route-id="@Model.UserDiaryId" class="btn btn-outline-secondary border form-control">Back to Diaries</a>
 						</div>
 					</div>
 
@@ -46,4 +46,8 @@
 	@{
 		<partial name="_ValidationScriptsPartial" />
 	}
+}@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{
 }

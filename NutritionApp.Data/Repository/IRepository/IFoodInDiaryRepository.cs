@@ -13,5 +13,6 @@ namespace NutritionApp.Data.Repository.IRepository
 		public void Update(FoodInDiary foodInDiary);
 
 		public ICollection<FoodInDiary> GetAllFoodFromDiary(Expression<Func<FoodInDiary, bool>> filter);
+		public void RemoveRang(IEnumerable<FoodInDiary>foodInDiary);
 	}
 }

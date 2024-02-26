@@ -2,7 +2,7 @@
 <div class="container">
 	<div class="row pt-4 pb-3">
 		<div class="col-6">
-			<h2 class="text-primary">
+			<h2 class="text-info">
 				Food
 			</h2>
 		</div>
@@ -27,9 +27,9 @@
 					<tr >
 						<th>Name of Food</th>
 						<th>Type of Food</th>
-						<th>Proteins(g)</th>
-						<th>Carbs(g)</th>
-						<th>Fat(g)</th>
+						<th>Proteins</th>
+						<th>Carbs</th>
+						<th>Fat</th>
 						<th>Action</th>
 					</tr>
 					
@@ -42,9 +42,9 @@
 							<tr>
 								<td>@f.FoodName</td>
 								<td>@f.TypeOfFood</td>
-								<td>@f.Proteins</td>
-								<td>@f.Carbs</td>
-								<td>@f.Fat</td>
+								<td>@f.Proteins g</td>
+								<td>@f.Carbs g</td>
+								<td>@f.Fat g</td>
 								<td class="w-25 text-center justify-content-center">
 									@{
 										if (User.IsInRole("Admin"))

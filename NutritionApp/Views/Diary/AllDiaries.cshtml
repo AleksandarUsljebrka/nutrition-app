@@ -1,0 +1,81 @@
+﻿@model List<UserDiary>
+
+<div class="container">
+	<div class="row pt-4 pb-3">
+		<div class="col-6">
+			<h2 class="text-info">
+				Diary History
+			</h2>
+		</div>
+		<div class="col-6 text-end">
+
+			<a asp-controller="Food" asp-action="Index" class="btn btn-primary border">
+				<i class="bi bi-caret-left-square"></i> Back to Food Table
+			</a>
+				
+		</div>
+	</div>
+</div>
+<div class="container">
+	<div class="row">
+
+		@{
+			@if (Model != null)
+			{
+
+
+				<div class="container">
+					<div class="row justify-content-center">
+						<div class="col-md-8 text-center table-responsive">
+							<table class="table text-light table-secondary">
+								<thead class="table-primary">
+										
+								<tr>
+										<th>Date</th>
+										<th>CalorieSummary</th>
+										<th>ProteinSummary</th>
+										<th>CarbSummary</th>
+										<th>FatSummary</th>
+										<th></th>
+
+									</tr>
+								</thead>
+								<tbody>
+									@foreach (var diary in Model)
+									{
+										<tr>
+											<td>@diary.DiaryDate.ToShortDateString()</td>
+											<td>@diary.CaloriesSummary kcal</td>
+											<td>@diary.ProteinsSummary g</td>
+											<td>@diary.CarbsSummary g</td>
+											<td>@diary.FatSummary g</td>
+
+											<td class="text-center">
+												<div class="col-auto w-100 text-center justify-content-center" role="group">
+													<a asp-controller="Diary" asp-action="DiaryDetails" asp-route-id="@diary.Id" class="btn-primary btn w-75 mx-2">
+														<i class="bi bi-three-dots-vertical d-inline"></i>Details
+													</a>
+													<a asp-controller="Diary" asp-action="DeleteDiary" asp-route-id="@diary.Id" class="btn btn-danger w-75 mx-2">
+														<i class="bi bi-trash"></i> Delete
+													</a>
+												</div>
+											</td>
+
+
+										</tr>
+									}
+								</tbody>
+							</table>
+						</div>
+					</div>
+					
+				</div>
+
+			}
+			else
+			{
+				<h3>@ViewBag.NotFound</h3>
+			}
+		}
+	</div>
+</div>

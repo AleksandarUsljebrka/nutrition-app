@@ -27,5 +27,10 @@ namespace NutritionApp.Data.Repository
 			return _context.Set<FoodInDiary>().ToList();
 		}
 
+		public void RemoveRang(IEnumerable<FoodInDiary> foodInDiary)
+		{
+			_context.FoodInDiaries.RemoveRange(foodInDiary);
+		}
+
 	}
 }

@@ -82,10 +82,31 @@ namespace NutritionApp.BusinessLogic.Services
 				}
 		
 		}
-
-		public UserDiary GetDiary()
+		public bool DeleteDiary(int? id)
 		{
-			UserDiary dbDiary = _unitOfWork.UserDiaryRepository.GetDiaryIncludeFood(d => d.DiaryDate == DateTime.Now.Date);
+			UserDiary diary = _unitOfWork.UserDiaryRepository.GetDiaryIncludeFood(d => d.Id == id);
+
+			if (diary == null)
+			{
+				return false;
+			}
+
+			//List<FoodInDiary> foodInDiary = diary.DailyFood as List<FoodInDiary>;
+
+			//if (foodInDiary != null) 
+			//{
+				_unitOfWork.FoodInDiaryRepository.RemoveRang(diary.DailyFood);
+			//}
+			_unitOfWork.UserDiaryRepository.Remove(diary);
+			_unitOfWork.SaveChanges();
+			return true;
+
+		}
+		public UserDiary GetTodaysDiary()
+		{
+            var currentUser = _userManager.GetUserAsync(_httpContextAccessor.HttpContext.User).Result;
+
+            UserDiary dbDiary = _unitOfWork.UserDiaryRepository.GetDiaryIncludeFood(d => d.DiaryDate == DateTime.Now.Date && d.UserForeignKeyId == currentUser.Id);
 			
 			if (dbDiary == null)
 			{
@@ -95,8 +116,32 @@ namespace NutritionApp.BusinessLogic.Services
 			
 			return dbDiary;
 		}
-	
-		public FoodInDiary GetFoodInDiary(int? foodId)
+		public UserDiary GetDiaryById(int? id)
+		{
+			UserDiary diary = _unitOfWork.UserDiaryRepository.GetDiaryById(d => d.Id == id);
+			
+			if(diary == null)
+			{
+				return null; 
+			}
+			return diary;
+		}
+
+		public List<UserDiary> GetAllDiaries()
+        {
+            var currentUser = _userManager.GetUserAsync(_httpContextAccessor.HttpContext.User).Result;
+
+            List<UserDiary> dbDiaries = _unitOfWork.UserDiaryRepository.GetAllDiariesIncludeFood(diary => diary.UserForeignKeyId == currentUser.Id).ToList();
+
+            if (dbDiaries == null)
+            {
+                return null;
+            }
+
+
+            return dbDiaries;
+        }
+        public FoodInDiary GetFoodInDiary(int? foodId)
 		{
 			FoodInDiary foodDiary = _unitOfWork.FoodInDiaryRepository.Get(f => f.Id == foodId);
 			if(foodDiary == null)
@@ -105,7 +150,11 @@ namespace NutritionApp.BusinessLogic.Services
 			}
 			return foodDiary;
 		}
-
+		public int GetDiaryIdByFoodId(int? id)
+		{
+			var diaryId = _unitOfWork.UserDiaryRepository.GetDiaryIdByFoodId(id);
+			return diaryId;
+		}
 		public bool DeleteFoodFromDiary(int? foodId)
 		{
 			FoodInDiary foodInDiary = _unitOfWork.FoodInDiaryRepository.Get(f => f.Id == foodId);
@@ -115,11 +164,15 @@ namespace NutritionApp.BusinessLogic.Services
 				return false;
 			}
 			
-			UserDiary userDiary = _unitOfWork.UserDiaryRepository.Get(d => d.Id == foodInDiary.UserDiaryId);
+			UserDiary userDiary = _unitOfWork.UserDiaryRepository.GetDiaryIncludeFood(d => d.Id == foodInDiary.UserDiaryId);
 
 			SubDiaryMacros(userDiary, foodInDiary);
 
-			_unitOfWork.UserDiaryRepository.Update(userDiary);
+			if((userDiary.DailyFood.Count - 1) <= 0)
+				_unitOfWork.UserDiaryRepository.Remove(userDiary);
+			else
+				_unitOfWork.UserDiaryRepository.Update(userDiary);
+			
 			_unitOfWork.FoodInDiaryRepository.Remove(foodInDiary);
 			_unitOfWork.SaveChanges();
 

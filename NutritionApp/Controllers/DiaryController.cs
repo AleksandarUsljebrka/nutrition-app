@@ -21,7 +21,7 @@ namespace NutritionApp.Controllers
 		}
         public IActionResult Index()
         {
-			UserDiary diary = _diaryService.GetDiary();
+			UserDiary diary = _diaryService.GetTodaysDiary();
 			if(diary == null)
 			{
 				ViewBag.NotFound = "There is no data to show.";
@@ -102,6 +102,8 @@ namespace NutritionApp.Controllers
 
 		public  IActionResult EditFood(int? foodId)
 		{
+			
+
 			if (foodId == null || foodId == 0)
 			{
 				return NotFound();
@@ -111,6 +113,7 @@ namespace NutritionApp.Controllers
 			{
 				return NotFound();
 			}
+			
 			return View(dbFood);
 		}
 
@@ -118,7 +121,72 @@ namespace NutritionApp.Controllers
 		[HttpPost, ActionName("EditFood")]
 		public IActionResult EditFoodPOST(int? id, float grams)
 		{
-			//FoodInDiary? dbFoodDiary = _diaryService.GetFoodInDiary(id);
+		
+			if (id == null)
+			{
+				TempData["error"] = "Error during editing food!";
+
+				return NotFound();
+			}
+
+			if (!_diaryService.UpdateFoodFromDiary(id, grams))
+			{
+				TempData["error"] = "Error during editing food!";
+
+				return NotFound();
+			}
+			
+
+			TempData["success"] = "Food edited successfully!";
+			
+			return RedirectToAction("Index");
+
+		}
+		public IActionResult AllDiaries()
+		{
+            List<UserDiary> diaries = _diaryService.GetAllDiaries();
+            if (diaries == null || diaries.Count <= 0)
+            {
+                ViewBag.NotFound = "There is no data to show.";
+                return View();
+            }
+            return View(diaries);
+        }
+
+		public IActionResult DiaryDetails(int? id)
+		{
+			UserDiary diary = _diaryService.GetDiaryById(id);
+			if (diary == null)
+			{
+				ViewBag.NotFound = "There is no diary to show.";
+				return View();
+			}
+			return View(diary);
+		}
+
+
+		public IActionResult EditHistoryFood(int? foodId)
+		{
+
+
+			if (foodId == null || foodId == 0)
+			{
+				return NotFound();
+			}
+			FoodInDiary? dbFood = _diaryService.GetFoodInDiary(foodId);
+			if (dbFood == null)
+			{
+				return NotFound();
+			}
+
+			return View(dbFood);
+		}
+
+
+		[HttpPost, ActionName("EditHistoryFood")]
+		public IActionResult EditHistoryFoodPOST(int? id, float grams)
+		{
+
 			if (id == null)
 			{
 				TempData["error"] = "Error during editing food!";
@@ -133,9 +201,49 @@ namespace NutritionApp.Controllers
 				return NotFound();
 			}
 
+
 			TempData["success"] = "Food edited successfully!";
-			return RedirectToAction("Index");
+
+			return RedirectToAction("DiaryDetails", new { id = _diaryService.GetDiaryIdByFoodId(id) });
 
 		}
+
+		public IActionResult DeleteDiary(int? id)
+		{
+
+			if (id == null || id == 0)
+			{
+				return NotFound();
+			}
+			UserDiary? diary = _diaryService.GetDiaryById(id);
+			if (diary == null)
+			{
+				return NotFound();
+			}
+			return View(diary);
+		}
+
+		[HttpPost, ActionName("DeleteDiary")]
+		public IActionResult DeleteDiaryPOST(int? id)
+		{
+			if (id == null)
+			{
+				TempData["error"] = "Error during removing diary!";
+
+				return NotFound();
+			}
+
+			if (!_diaryService.DeleteDiary(id))
+			{
+				TempData["error"] = "Error during removing food!";
+
+				return NotFound();
+			}
+
+			TempData["success"] = "Diary deleted successfully!";
+			return RedirectToAction("AllDiaries");
+
+		}
+
 	}
 }
