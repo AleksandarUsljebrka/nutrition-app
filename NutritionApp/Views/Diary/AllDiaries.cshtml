@@ -4,13 +4,13 @@
 	<div class="row pt-4 pb-3">
 		<div class="col-6">
 			<h2 class="text-info">
-				Diary History
+				Istorija Dnevnika
 			</h2>
 		</div>
 		<div class="col-6 text-end">
 
 			<a asp-controller="Food" asp-action="Index" class="btn btn-primary border">
-				<i class="bi bi-caret-left-square"></i> Back to Food Table
+				<i class="bi bi-caret-left-square"></i> Nazad na hranu
 			</a>
 				
 		</div>
@@ -31,11 +31,11 @@
 								<thead class="table-primary">
 										
 								<tr>
-										<th>Date</th>
-										<th>CalorieSummary</th>
-										<th>ProteinSummary</th>
-										<th>CarbSummary</th>
-										<th>FatSummary</th>
+										<th>Datum</th>
+										<th>Kalorije</th>
+										<th>Proteini</th>
+										<th>Ugljeni Hidrati</th>
+										<th>Masti</th>
 										<th></th>
 
 									</tr>
@@ -53,10 +53,10 @@
 											<td class="text-center">
 												<div class="col-auto w-100 text-center justify-content-center" role="group">
 													<a asp-controller="Diary" asp-action="DiaryDetails" asp-route-id="@diary.Id" class="btn-primary btn w-75 mx-2">
-														<i class="bi bi-three-dots-vertical d-inline"></i>Details
+														<i class="bi bi-three-dots-vertical d-inline"></i>Detalji
 													</a>
 													<a asp-controller="Diary" asp-action="DeleteDiary" asp-route-id="@diary.Id" class="btn btn-danger w-75 mx-2">
-														<i class="bi bi-trash"></i> Delete
+														<i class="bi bi-trash"></i> Obriši
 													</a>
 												</div>
 											</td>

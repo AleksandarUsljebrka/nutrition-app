@@ -35,13 +35,13 @@
 						@if (signInManager.IsSignedIn(User))
 						{
 							<li class="nav-item">
-								<a class="nav-link" asp-controller="Diary" asp-action="Index">Home</a>
+								<a class="nav-link" asp-controller="Diary" asp-action="Index">Početna</a>
 							</li>
 							@if (User.IsInRole("User"))
 							{
 								
 								<li class="nav-item">
-										<a class="nav-link" asp-controller="Diary" asp-action="AllDiaries">Diary History</a>
+										<a class="nav-link" asp-controller="Diary" asp-action="AllDiaries">Istorija Praćenja</a>
 
 								</li>
 							}
@@ -50,13 +50,13 @@
 						{
 							<li class="nav-item">
 
-								<a class="nav-link" asp-controller="Home" asp-action="Index">Home</a>
+								<a class="nav-link" asp-controller="Home" asp-action="Index">Početna</a>
 
 							</li>
 						}
 						
 						<li class="nav-item">
-							<a class="nav-link" asp-controller="Home" asp-action="About">About</a>
+							<a class="nav-link" asp-controller="Home" asp-action="About">O nama</a>
 						</li>
 
 					</ul>

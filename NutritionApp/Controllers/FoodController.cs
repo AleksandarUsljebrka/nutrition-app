@@ -35,7 +35,7 @@ namespace NutritionApp.Controllers
 			if (ModelState.IsValid)
 			{
 				_foodService.AddFood(newFood);
-				TempData["success"] = "Food added successfully!";
+				TempData["success"] = "Hrana uspešno dodata!";
 
 				return RedirectToAction("Index");
 			}
@@ -65,7 +65,7 @@ namespace NutritionApp.Controllers
 			if (ModelState.IsValid)
 			{
 				_foodService.UpdateFood(editedFood);
-				TempData["success"] = "Food updated successfully!";
+				TempData["success"] = "Hrana uspešno izmenjena!";
 
 				return RedirectToAction("Index");
 			}
@@ -92,14 +92,14 @@ namespace NutritionApp.Controllers
 			Food? dbFood = _foodService.GetFood(id);
 			if(dbFood == null)
 			{
-				TempData["error"] = "Error during removing food!";
+				TempData["error"] = "Greška prilikom brisanja hrane!";
 
 				return NotFound();
 			}
 
 			_foodService.DeleteFood(dbFood);
 
-			TempData["success"] = "Food deleted successfully!"; 
+			TempData["success"] = "Hrana uspešno obrisana!"; 
 			return RedirectToAction("Index");
 
 		}

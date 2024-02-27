@@ -8,7 +8,7 @@
 				<div class="card p-3 mt-4 ">
 					<div class="row card-header bg-secondary bg-gradient pb-2 p-1">
 						<h2 class="text-info">
-							Add Food To Diary
+							Dodaj u Dnevnik
 						</h2>
 						<hr />
 					</div>
@@ -19,17 +19,17 @@
 					</div>
 					<div class="row mb-3 p-1">
 						<label asp-for="TypeOfFood" class="form-label"></label>
-						<select asp-for="TypeOfFood" disabled class="form-select">
-							<option class="selectpicker" value="Meat Fish and Eggs">Meat Fish and Eggs</option>
-							<option class="selectpicker" value="Dairy product">Dairy product</option>
-							<option class="selectpicker" value="Fruits">Fruits</option>
-							<option class="selectpicker" value="Vegetables">Vegetables</option>
-							<option class="selectpicker" value="Grains">Grains</option>
-							<option class="selectpicker" value="Legumes">Legumes</option>
-							<option class="selectpicker" value="Nuts and Seeds">Nuts and Seeds</option>
-							<option class="selectpicker" value="Oils and Fats">Oils and Fats</option>
-							<option class="selectpicker" value="Sweets and Snacks">Sweets and Snacks</option>
-							<option class="selectpicker" value="Beverages">Beverages</option>
+						<select asp-for="TypeOfFood" class="form-select">
+							<option class="selectpicker" value="Meso, Riba i jaja">Meso, Riba i jaja</option>
+							<option class="selectpicker" value="Mlečni proizvodi">Mlečni proizvodi</option>
+							<option class="selectpicker" value="Voće">Voće</option>
+							<option class="selectpicker" value="Povrće">Povrće</option>
+							<option class="selectpicker" value="Žitarice">Žitarice</option>
+							<option class="selectpicker" value="Mahunarke">Mahunarke</option>
+							<option class="selectpicker" value="Orašasti plodovi i semenke">Orašasti plodovi i semenke</option>
+							<option class="selectpicker" value="Ulja i masti">Ulja i masti</option>
+							<option class="selectpicker" value="Slatkiši i grickalice">Slatkiši i grickalice</option>
+							<option class="selectpicker" value="Pića">Pića</option>
 						</select>
 					</div>
 					<div class="row mb-3 p-1">
@@ -58,12 +58,12 @@
 					</div>
 					<div class="row justify-content-center">
 						<div class="col-6 ">
-							<button type="submit" class="btn btn-primary form-control">Add To Diary</button>
+							<button type="submit" class="btn btn-primary form-control">Dodaj</button>
 
 						</div>
 						<div class="col-6 ">
 
-							<a asp-controller="Food" asp-action="Index" class="btn btn-outline-secondary border form-control">Back to Food Table</a>
+							<a asp-controller="Food" asp-action="Index" class="btn btn-outline-secondary border form-control">Nazad na tabelu</a>
 						</div>
 					</div>
 

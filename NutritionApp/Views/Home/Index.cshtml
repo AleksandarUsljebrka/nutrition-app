@@ -8,13 +8,13 @@
 @if (!signInManager.IsSignedIn(User))
 {
     <div class="text-center">
-        <h1 class="display-4">Welcome</h1>
+        <h1 class="display-4">Dobrodošli!</h1>
     
     </div>
     <div class="text-center">
         
-        <h3><a asp-controller="User" asp-action="Login">Login</a> to use the app.</h3>
+        <h3><a asp-controller="User" asp-action="Login">Prijavite se</a> da bi koristili aplikaciju.</h3>
         
-        <h4>Don't have an account? <a asp-controller="User" asp-action="Register">Register here</a>.</h4>
+        <h4>Nemate nalog? Napravite nalog <a asp-controller="User" asp-action="Register">ovde.</a> </h4>
     </div>
 }

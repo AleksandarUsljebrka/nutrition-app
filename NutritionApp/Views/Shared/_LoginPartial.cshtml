@@ -5,7 +5,7 @@
 	@if (signInManager.IsSignedIn(User))
 	{
 		<li class="nav-item">
-			<a class="nav-link" asp-controller="Food" asp-action="Index">All Food</a>
+			<a class="nav-link" asp-controller="Food" asp-action="Index">Sva Hrana</a>
 		</li>
 		<li class="nav-item dropdown">
 			<a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
@@ -14,7 +14,7 @@
 			<ul class="dropdown-menu" aria-labelledby="navbarDropdown">
 				<li>
 					<a class="dropdown-item" asp-action="Logout" asp-controller="User">
-						Logout
+						Odjavi se
 					</a>
 				</li>
 			</ul>
@@ -23,10 +23,10 @@
 	else
 	{
 		<li class="nav-item">
-			<a class="nav-link" asp-controller="User" asp-action="Register">Register</a>
+			<a class="nav-link" asp-controller="User" asp-action="Register">Napravi Nalog</a>
 		</li>
 		<li class="nav-item">
-			<a class="nav-link" asp-controller="User" asp-action="Login">Login</a>
+			<a class="nav-link" asp-controller="User" asp-action="Login">Prijavi se</a>
 		</li>
 	}
 

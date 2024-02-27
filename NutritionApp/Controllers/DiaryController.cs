@@ -24,7 +24,7 @@ namespace NutritionApp.Controllers
 			UserDiary diary = _diaryService.GetTodaysDiary();
 			if(diary == null)
 			{
-				ViewBag.NotFound = "There is no data to show.";
+				ViewBag.NotFound = "Trenutno nema dnevnika.";
 				return View();
 			}
             return View(diary);
@@ -50,6 +50,8 @@ namespace NutritionApp.Controllers
 
 			if (id == null || id == 0)
 			{
+				TempData["error"] = "Greška prilikom dodavanja hrane!";
+
 				return NotFound();
 			}
 			var grams = Request.Form["grams"];
@@ -58,7 +60,8 @@ namespace NutritionApp.Controllers
 				
 				_diaryService.Add(id, quantity);
 			}
-			
+			TempData["success"] = "Hrana uspešno dodata!";
+
 			return RedirectToAction("Index");
 		}
 
@@ -83,19 +86,19 @@ namespace NutritionApp.Controllers
 			//FoodInDiary? dbFoodDiary = _diaryService.GetFoodInDiary(id);
 			if (id == null)
 			{
-				TempData["error"] = "Error during removing food!";
+				TempData["error"] = "Greška prilikom brisanja hrane!";
 
 				return NotFound();
 			}
 
 			if (!_diaryService.DeleteFoodFromDiary(id))
 			{
-				TempData["error"] = "Error during removing food!";
+				TempData["error"] = "Greška prilikom brisanja hrane!";
 
 				return NotFound();
 			}
 
-			TempData["success"] = "Food deleted successfully!";
+			TempData["success"] = "Hrana uspešno obrisana!";
 			return RedirectToAction("Index");
 
 		}
@@ -124,20 +127,20 @@ namespace NutritionApp.Controllers
 		
 			if (id == null)
 			{
-				TempData["error"] = "Error during editing food!";
+				TempData["error"] = "Greška prilikom izmene hrane!";
 
 				return NotFound();
 			}
 
 			if (!_diaryService.UpdateFoodFromDiary(id, grams))
 			{
-				TempData["error"] = "Error during editing food!";
+				TempData["error"] = "Greška prilikom izmene hrane!";
 
 				return NotFound();
 			}
 			
 
-			TempData["success"] = "Food edited successfully!";
+			TempData["success"] = "Hrana uspešno izmenjena!";
 			
 			return RedirectToAction("Index");
 
@@ -147,7 +150,7 @@ namespace NutritionApp.Controllers
             List<UserDiary> diaries = _diaryService.GetAllDiaries();
             if (diaries == null || diaries.Count <= 0)
             {
-                ViewBag.NotFound = "There is no data to show.";
+                ViewBag.NotFound = "Trenutno nema dnevnika.";
                 return View();
             }
             return View(diaries);
@@ -158,7 +161,7 @@ namespace NutritionApp.Controllers
 			UserDiary diary = _diaryService.GetDiaryById(id);
 			if (diary == null)
 			{
-				ViewBag.NotFound = "There is no diary to show.";
+				ViewBag.NotFound = "Trenutno nema dnevnika.";
 				return View();
 			}
 			return View(diary);
@@ -189,20 +192,20 @@ namespace NutritionApp.Controllers
 
 			if (id == null)
 			{
-				TempData["error"] = "Error during editing food!";
+				TempData["error"] = "Greška prilikom izmene hrane!";
 
 				return NotFound();
 			}
 
 			if (!_diaryService.UpdateFoodFromDiary(id, grams))
 			{
-				TempData["error"] = "Error during editing food!";
+				TempData["error"] = "Greška prilikom izmene hrane!";
 
 				return NotFound();
 			}
 
 
-			TempData["success"] = "Food edited successfully!";
+			TempData["success"] = "Hrana uspešno izmenjena!";
 
 			return RedirectToAction("DiaryDetails", new { id = _diaryService.GetDiaryIdByFoodId(id) });
 
@@ -228,19 +231,19 @@ namespace NutritionApp.Controllers
 		{
 			if (id == null)
 			{
-				TempData["error"] = "Error during removing diary!";
+				TempData["error"] = "Greška prilikom brisanja hrane!";
 
 				return NotFound();
 			}
 
 			if (!_diaryService.DeleteDiary(id))
 			{
-				TempData["error"] = "Error during removing food!";
+				TempData["error"] = "Greška prilikom brisanja hrane!";
 
 				return NotFound();
 			}
 
-			TempData["success"] = "Diary deleted successfully!";
+			TempData["success"] = "Hrana uspešno obrisana!";
 			return RedirectToAction("AllDiaries");
 
 		}

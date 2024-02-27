@@ -3,7 +3,7 @@
 	<div class="row pt-4 pb-3">
 		<div class="col-6">
 			<h2 class="text-info">
-				Food
+				Sva Hrana
 			</h2>
 		</div>
 		<div class="col-6 text-end">
@@ -11,7 +11,7 @@
 				if (User.IsInRole("Admin"))
 				{
 					<a asp-controller="Food" asp-action="AddFood" class="btn btn-primary">
-						<i class="bi bi-plus-square"></i> New Food
+						<i class="bi bi-plus-square"></i> Nova Hrana
 					</a>
 				}
 			}
@@ -25,12 +25,12 @@
 				<thead class="table-primary">
 					
 					<tr >
-						<th>Name of Food</th>
-						<th>Type of Food</th>
-						<th>Proteins</th>
-						<th>Carbs</th>
-						<th>Fat</th>
-						<th>Action</th>
+						<th>Naziv Hrane</th>
+						<th>TIp Hrane</th>
+						<th>Proteini</th>
+						<th>Ugljeni Hidrati</th>
+						<th>Masti</th>
+						<th></th>
 					</tr>
 					
 				</thead>
@@ -52,10 +52,10 @@
 											
 												<div class=" w-75 text-center justify-content-center" role="group">
 													<a asp-controller="Food" asp-action="EditFood" asp-route-foodId="@f.Id" class="btn-primary btn w-75 mx-2">
-														<i class="bi bi-pencil-square"></i> Edit
+														<i class="bi bi-pencil-square"></i> Izmeni
 													</a>
 												<a asp-controller="Food" asp-action="DeleteFood" asp-route-foodId="@f.Id" class="btn btn-danger w-75 mx-2">
-														<i class="bi bi-trash"></i> Delete
+														<i class="bi bi-trash"></i> Obriši
 													</a>
 											</div>
 
@@ -64,7 +64,7 @@
 										{
 											<div class=" w-75 text-center justify-content-center" role="group">
 												<a asp-controller="Diary" asp-action="AddToDiary" asp-route-foodId="@f.Id" class="btn-primary btn w-75 mx-2">
-													<i class="bi bi-plus-square"></i> Add To Diary
+													<i class="bi bi-plus-square"></i> Dodaj u Dnevnik
 												</a>
 												
 											</div>

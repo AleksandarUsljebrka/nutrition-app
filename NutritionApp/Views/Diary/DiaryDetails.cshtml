@@ -1,4 +1,5 @@
-﻿
+﻿@model UserDiary
+
 <div class="container">
 	<div class="row">
 
@@ -10,23 +11,23 @@
 				<div class="col-md-12">
 					<div class="card bg-light ">
 						<div class="card-header d-flex justify-content-between align-items-center bg-primary" style="max-height: 300px; overflow-y: auto;">
-							<h4>Diary Details</h4>
-							<p>Date: @Model.DiaryDate.ToShortDateString()</p>
+							<h4>Detalji Dnevnika</h4>
+							<p>Datum: @Model.DiaryDate.ToShortDateString()</p>
 						</div>
 						<div class="card-body d-flex justify-content-between align-items-center">
-							<h5 class="card-text text-dark fw-bold">Proteins: @Model.ProteinsSummary g</h5>
-							<h5 class="card-text text-dark fw-bold">Carbs: @Model.CarbsSummary g</h5>
-							<h5 class="card-text text-dark fw-bold">Fat: @Model.FatSummary g</h5>
-							<h5 class="card-text text-dark fw-bold">Calories: @Model.CaloriesSummary kcal</h5>
+							<h5 class="card-text text-dark fw-bold">Proteini: @Model.ProteinsSummary g</h5>
+							<h5 class="card-text text-dark fw-bold">Ugljeni Hidrati: @Model.CarbsSummary g</h5>
+							<h5 class="card-text text-dark fw-bold">Masti: @Model.FatSummary g</h5>
+							<h5 class="card-text text-dark fw-bold">Kalorije: @Model.CaloriesSummary kcal</h5>
 
 							<div class="card shadow mt-3">
-								<h5 class="card-header bg-dark">Food List</h5>
+								<h5 class="card-header bg-dark">Lista Hrane</h5>
 								<div class="card-body bg-secondary text-center" style="max-height: 300px; overflow-y: auto;">
 									<table class="table table-secondary">
 										<thead>
 											<tr>
-												<th>Food</th>
-												<th>Grams</th>
+												<th>Hrana</th>
+												<th>Količina (g)</th>
 												<th></th>
 
 											</tr>
@@ -43,10 +44,10 @@
 																
 
 																<a asp-controller="Diary" asp-action="EditHistoryFood" asp-route-foodId="@food.Id" class="btn-primary btn w-75 mx-2">
-																<i class="bi bi-pencil-square"></i> Edit
+																<i class="bi bi-pencil-square"></i> Izmeni
 															</a>
 															<a asp-controller="Diary" asp-action="DeleteFood" asp-route-foodId="@food.Id" class="btn btn-danger w-75 mx-2">
-																<i class="bi bi-trash"></i> Delete
+																<i class="bi bi-trash"></i> Obriši
 															</a>
 														</form>
 														</div>
@@ -64,7 +65,7 @@
 
 							<div class="col-auto text-center">
 
-								<a asp-controller="Diary" asp-action="AllDiaries" class="btn btn-primary form-control">Back to Diaries</a>
+								<a asp-controller="Diary" asp-action="AllDiaries" class="btn btn-primary form-control">Nazad na dnevnike</a>
 
 							</div>
 						</div>

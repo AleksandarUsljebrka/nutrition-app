@@ -5,20 +5,23 @@ namespace NutritionApp.Models.AuthModels
 {
     public class RegisterViewModel
     {
-        [Required(ErrorMessage = "Name is required!")]
-        public string? Name { get; set; }
+        [Required(ErrorMessage = "Ime je obavezno!")]
+		[DisplayName("Ime")]
+		public string? Name { get; set; }
 
-        [Required(ErrorMessage = "Email is required!")]
-        [DataType(DataType.EmailAddress)]
+        [Required(ErrorMessage = "Email je obavezan!")]
+		[DisplayName("Email adresa")]
+		[DataType(DataType.EmailAddress)]
         public string? Email { get; set; }
 
         [DataType(DataType.Password)]
-        [Required(ErrorMessage = "Password is required!")]
+		[DisplayName("Šifra")]
+		[Required(ErrorMessage = "Šifra je obavezna!")]
         public string? Password { get; set; }
 
-        [Required(ErrorMessage = "Confirm password is required!")]
-        [DisplayName("Confirm Password")]
-        [Compare("Password", ErrorMessage = "Password don't match!")]
+        [Required(ErrorMessage = "Potvrda šifre je obavezna!")]
+        [DisplayName("Potvrda Šifre")]
+        [Compare("Password", ErrorMessage = "Šifre se ne poklapaju!")]
         [DataType(DataType.Password)]
         public string? ConfirmPassword { get; set; }
     }
