@@ -1,13 +1,15 @@
 ﻿@model UserDiary
 
 
-<div class="container">
+<div class="container pt-4">
 	<div class="row">
 
 		@{
-			@if (Model != null)
+			if (User.IsInRole("User"))
 			{
-				
+				@if (Model != null)
+				{
+
 					<div class="col-md-12">
 						<div class="card bg-light ">
 							<div class="card-header d-flex justify-content-between align-items-center bg-primary" style="max-height: 300px; overflow-y: auto;">
@@ -15,10 +17,10 @@
 								<p>Datum: @Model.DiaryDate.ToShortDateString()</p>
 							</div>
 							<div class="card-body d-flex justify-content-between align-items-center">
-								<h5 class="card-text text-dark fw-bold">Proteini: @Model.ProteinsSummary g</h5>
-								<h5 class="card-text text-dark fw-bold">Ugljeni Hidrati: @Model.CarbsSummary g</h5>
-								<h5 class="card-text text-dark fw-bold">Masti: @Model.FatSummary g</h5>
-								<h5 class="card-text text-dark fw-bold">Kalorije: @Model.CaloriesSummary kcal</h5>
+								<h5 class="card-text text-dark fw-bold">Proteini:@String.Format("{0:0.00}", Model.ProteinsSummary) g</h5>
+								<h5 class="card-text text-dark fw-bold">Ugljeni Hidrati: @String.Format("{0:0.00}", Model.CarbsSummary)</h5>
+								<h5 class="card-text text-dark fw-bold">Masti: @String.Format("{0:0.00}", Model.FatSummary)</h5>
+								<h5 class="card-text text-dark fw-bold">Kalorije: @String.Format("{0:0.00}", Model.CaloriesSummary)</h5>
 
 								<div class="card shadow mt-3">
 									<h5 class="card-header bg-dark">List Hrane</h5>
@@ -53,74 +55,76 @@
 													</tr>
 												}
 											</tbody>
-									</table>
+										</table>
+									</div>
+								</div>
+							</div>
+							<div class="d-flex justify-content-center">
+
+								<div class="col-auto text-center">
+
+									<a asp-controller="Food" asp-action="Index" class="btn btn-primary border">Nazad na hranu</a>
 								</div>
 							</div>
 						</div>
-						<div class="d-flex justify-content-center">
-
-							<div class="col-auto text-center">
-
-								<a asp-controller="Food" asp-action="Index" class="btn btn-primary border">Nazad na hranu</a>
-							</div>
-						</div>
 					</div>
-				</div>
-				
-			}
-			else 
-			{
+
+				}
+				else
+				{
 
 
-				<div class="col-md-12">
-					<div class="card bg-light ">
-						<div class="card-header d-flex justify-content-between align-items-center bg-primary" style="max-height: 300px; overflow-y: auto;">
-							<h4>Današnji Dnevnik</h4>
-							<p>Date: @DateTime.Now.Date.ToShortDateString()</p>
-						</div>
-						<div class="card-body d-flex justify-content-between align-items-center">
-							<h5 class="card-text text-dark fw-bold">Proteini: 0 g</h5>
-							<h5 class="card-text text-dark fw-bold">Ugljeni Hidrati: 0 g</h5>
-							<h5 class="card-text text-dark fw-bold">Masti: 0 g</h5>
-							<h5 class="card-text text-dark fw-bold">Kalorije: 0 kcal</h5>
+					<div class="col-md-12">
+						<div class="card bg-light ">
+							<div class="card-header d-flex justify-content-between align-items-center bg-primary" style="max-height: 300px; overflow-y: auto;">
+								<h4>Današnji Dnevnik</h4>
+								<p>Date: @DateTime.Now.Date.ToShortDateString()</p>
+							</div>
+							<div class="card-body d-flex justify-content-between align-items-center">
+								<h5 class="card-text text-dark fw-bold">Proteini: 0 g</h5>
+								<h5 class="card-text text-dark fw-bold">Ugljeni Hidrati: 0 g</h5>
+								<h5 class="card-text text-dark fw-bold">Masti: 0 g</h5>
+								<h5 class="card-text text-dark fw-bold">Kalorije: 0 kcal</h5>
 
-							<div class="card shadow mt-3">
-								<h5 class="card-header bg-dark">Lista Hrane</h5>
-								<div class="card-body bg-secondary text-center" style="max-height: 300px; overflow-y: auto;">
-									<table class="table table-secondary">
-										<thead>
-											<tr>
-												<th>Hrana</th>
-												<th>Količina (g)</th>
-												<th></th>
+								<div class="card shadow mt-3">
+									<h5 class="card-header bg-dark">Lista Hrane</h5>
+									<div class="card-body bg-secondary text-center" style="max-height: 300px; overflow-y: auto;">
+										<table class="table table-secondary">
+											<thead>
+												<tr>
+													<th>Hrana</th>
+													<th>Količina (g)</th>
+													<th></th>
 
-											</tr>
-										</thead>
-										<tbody>
-											
+												</tr>
+											</thead>
+											<tbody>
+
 												<tr>
 													<td>/</td>
 													<td>/</td>
-													
+
 
 
 												</tr>
-											
-										</tbody>
-									</table>
+
+											</tbody>
+										</table>
+									</div>
+								</div>
+							</div>
+							<div class="d-flex justify-content-center">
+
+								<div class="col-auto text-center">
+
+									<a asp-controller="Food" asp-action="Index" class="btn btn-primary border">Nazad na hranu</a>
 								</div>
 							</div>
 						</div>
-						<div class="d-flex justify-content-center">
-
-							<div class="col-auto text-center">
-
-								<a asp-controller="Food" asp-action="Index" class="btn btn-primary border">Nazad na hranu</a>
-							</div>
-						</div>
 					</div>
-				</div>
+				}
 			}
+			
 		}
 	</div>
 </div>

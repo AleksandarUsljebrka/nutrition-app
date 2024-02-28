@@ -1,0 +1,48 @@
+﻿@model List<User>
+<div class="container">
+	<div class="row pt-4 pb-3">
+		<div class="col-6">
+			<h2 class="text-info">
+				Korisnici
+			</h2>
+		</div>
+		
+	</div>
+</div>
+<div class="container">
+	<div class="row justify-content-center " style=" max-height: 400px; overflow-y: auto;">
+		<div class="col-md-8 text-center table-responsive">
+			<table class="table text-light table-secondary">
+				<thead class="table-primary">
+
+					<tr>
+						<th>Ime</th>
+						<th>Email</th>
+						<th></th>
+					</tr>
+
+				</thead>
+				<tbody>
+					@{
+						foreach (var u in Model)
+						{
+
+							<tr>
+								<td>@u.Name</td>
+								<td>@u.Email</td>
+								<td class="text-center">
+									<div class="col-auto w-75 text-center justify-content-center" role="group">
+										<a asp-controller="User" asp-action="DeleteUser" asp-route-id="@u.Id" class="btn btn-danger w-75 mx-2">
+											<i class="bi bi-trash"></i> Obriši
+										</a>
+									</div>
+								</td>
+								
+							</tr>
+						}
+					}
+				</tbody>
+			</table>
+		</div>
+	</div>
+</div>

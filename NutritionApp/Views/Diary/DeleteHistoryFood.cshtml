@@ -1,28 +1,26 @@
-﻿
-@model AddFoodToDiaryModel
-
-<div class="container">
+﻿@model FoodInDiary
+<div class="container ">
 	<div class="row justify-content-center " style="height:70vh;">
 		<div class="col-md-6">
 
-			<form method="post" class="text-center ">
-				<input asp-for="Id" hidden />
 
-				<div class="card  p-3 mt-4 ">
+			<form method="post" class="text-center">
+				<input asp-for="Id" hidden />
+				<div class="card p-3 mt-4 ">
 					<div class="row card-header bg-secondary bg-gradient pb-2 p-1">
 						<h2 class="text-info">
-							Dodaj Hranu
+							Obriši hranu
 						</h2>
 						<hr />
 					</div>
 					<div class=" row mb-3 p-1">
 						<div class="form-floating py-2 col-md-6">
-							<input asp-for="FoodName" readonly type="text" class="text-center  form-control" />
+							<input asp-for="FoodName" disabled type="text" class="text-center  form-control" />
 							<label asp-for="FoodName" class="form-label text-dark ms-4"></label>
-							<span asp-validation-for="FoodName" class="text-danger"></span>
+							
 						</div>
 						<div class="form-floating py-2 col-md-6">
-							<select asp-for="TypeOfFood" readonly class="form-select">
+							<select asp-for="TypeOfFood" disabled class="form-select">
 								<option class="selectpicker" value="Meso, Riba i jaja">Meso, Riba i jaja</option>
 								<option class="selectpicker" value="Mlečni proizvodi">Mlečni proizvodi</option>
 								<option class="selectpicker" value="Voće">Voće</option>
@@ -38,47 +36,36 @@
 
 						</div>
 					</div>
-					<div class=" row mb-1 p-1">
+					<div class=" row mb-3 p-1">
 
 						<div class="form-floating  py-2 col-md-4">
-							<input asp-for="Proteins" readonly type="number" min="0" class="text-center  form-control" />
+							<input asp-for="Proteins" disabled type="number" min="0" class="text-center  form-control" />
 							<label asp-for="Proteins" class="form-label text-dark ms-4"></label>
-							<span asp-validation-for="Proteins" class="text-danger"></span>
+						
 						</div>
 						<div class="form-floating py-2 col-md-4">
-							<input asp-for="Carbs" readonly type="number"  min="0" class="text-center form-control" />
+							<input asp-for="Carbs" disabled="number" min="0" class="text-center form-control" />
 							<label asp-for="Carbs" class="form-label text-dark ms-4"></label>
-							<span asp-validation-for="Carbs" class="text-danger"></span>
+							
 						</div>
 						<div class="form-floating py-2 col-md-4">
-							<input asp-for="Fat" readonly type="number" min="0" class="text-center form-control" />
+							<input asp-for="Fat" disabled type="number" min="0" class="text-center form-control" />
 							<label asp-for="Fat" class="form-label text-dark ms-4"></label>
-							<span asp-validation-for="Fat" class="text-danger"></span>
 						</div>
-					</div>
-					<div class="row mb-3 offset-md-0 col-md-12 p-1">
-						<div class="form-floating py-2 mb-3 offset-md-0 col-md-12 p-1">
-							<input asp-for="Grams" type="number" min="1" step="0.01" pattern="^\d+(\.\d{1,2})?$" title="Molimo unesite broj sa najviše dve decimale da je različit od 0." class="text-center form-control" />
-							<label asp-for="Grams" class="form-label text-dark ms-4"></label>
-							<span asp-validation-for="Grams" class="text-danger"></span>
-						</div>
-
 					</div>
 					<div class="row justify-content-center">
 						<div class="col-6 ">
-							<button type="submit" class="btn btn-primary form-control">Dodaj</button>
+							<button type="submit" class="btn btn-primary form-control">Obriši</button>
+
 						</div>
 						<div class="col-6 ">
-							<a asp-controller="Food" asp-action="Index" class="btn btn-outline-secondary border form-control">Nazad na tabelu</a>
+
+							<a asp-controller="Diary" asp-action="DiaryDetails" asp-route-id="@Model.UserDiaryId" class="btn btn-outline-secondary border form-control">Nazad na detalje</a>
 						</div>
 					</div>
+
 				</div>
 			</form>
 		</div>
 	</div>
 </div>
-@section Scripts {
-	@{
-		<partial name="_ValidationScriptsPartial" />
-	}
-}

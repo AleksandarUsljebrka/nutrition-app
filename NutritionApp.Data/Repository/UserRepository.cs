@@ -15,9 +15,6 @@ namespace NutritionApp.Data.Repository
         {
             
         }
-  //      public User GetUser(string username)
-		//{
-			
-		//}
+  
 	}
 }

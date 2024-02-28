@@ -39,6 +39,8 @@ namespace NutritionApp.Controllers
 
 				return RedirectToAction("Index");
 			}
+			TempData["error"] = "Greška prilikom dodavanja hrane!";
+
 			return View();
 		}
 
@@ -46,14 +48,16 @@ namespace NutritionApp.Controllers
 		{
 			if (foodId == null || foodId == 0)
 			{
-				return NotFound();
+				TempData["error"] = "Greška prilikom pokušaja pristupa!";
+				return RedirectToAction("Index");
 			}
 
 			Food? dbFood = _foodService.GetFood(foodId);
 
 			if (dbFood == null)
 			{
-				return NotFound();
+				TempData["error"] = "Greška prilikom pokušaja pristupa!";
+				return RedirectToAction("Index");
 			}
 			return View(dbFood);
 		}
@@ -69,6 +73,8 @@ namespace NutritionApp.Controllers
 
 				return RedirectToAction("Index");
 			}
+			TempData["error"] = "Greška prilikom izmene hrane!";
+
 			return View();
 		}
 
@@ -76,12 +82,15 @@ namespace NutritionApp.Controllers
 		{
 			if (foodId == null || foodId == 0)
 			{
-				return NotFound();
+				TempData["error"] = "Greška prilikom pokušaja pristupa!";
+				return RedirectToAction("Index");
 			}
 			Food? dbFood = _foodService.GetFood(foodId);
 			if (dbFood == null)
 			{
-				return NotFound();
+				TempData["error"] = "Greška prilikom pokušaja pristupa!";
+
+				return RedirectToAction("Index");
 			}
 			return View(dbFood);
 		}
@@ -94,7 +103,7 @@ namespace NutritionApp.Controllers
 			{
 				TempData["error"] = "Greška prilikom brisanja hrane!";
 
-				return NotFound();
+				return RedirectToAction("Index");
 			}
 
 			_foodService.DeleteFood(dbFood);
@@ -103,28 +112,6 @@ namespace NutritionApp.Controllers
 			return RedirectToAction("Index");
 
 		}
-		//public string MappValue(string typeOfFood)
-		//{
-		//	Dictionary<string, string> valueMappings = new Dictionary<string, string>
-		//	{
-		//		{ "meatFishEggs", "Meat, Fish and eggs" },
-		//		{ "dairy", "Dairy product" },
-		//		{ "fruit", "Fruits" },
-		//		{ "vegetables", "Vegetables" },
-		//		{ "grains", "Grains" },
-		//		{ "legumes", "Legumes" },
-		//		{ "nuts", "Nuts and Seeds" },
-		//		{ "oils", "Oils and Fats" },
-		//		{ "sweets", "Sweets and Snacks" },
-		//		{ "beverages", "Beverages" },
-
-		//	};
-		//	if (valueMappings.ContainsKey(typeOfFood))
-		//	{
-		//		typeOfFood = valueMappings[typeOfFood];
-
-		//	}
-		//	return typeOfFood;
-		//}
+		
 	}
 }

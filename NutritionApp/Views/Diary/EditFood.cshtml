@@ -1,7 +1,7 @@
 ﻿@model FoodInDiary
 
 <div class="container">
-	<div class="row justify-content-center align-items-center" style="height:100vh;">
+	<div class="row justify-content-center " style="height:80vh;">
 		<div class="col-md-6">
 
 			<form method="post" class="text-center">
@@ -14,18 +14,19 @@
 						</h2>
 						<hr />
 					</div>
-					<div class="row mb-3 p-1">
-						<label asp-for="FoodName" class="form-label"></label>
-						<input asp-for="FoodName" disabled type="text" class="form-control text-center" />
-						<span asp-validation-for="FoodName" class="text-danger"></span>
+					<div class="row">
+					<div class="form-floating py-2 col-md-6">
+							<input asp-for="FoodName" disabled type="text" class="text-center  form-control" />
+							<label asp-for="FoodName" class="form-label text-dark ms-4"></label>
+							<span asp-validation-for="FoodName" class="text-danger"></span>
 					</div>
-					<div class="row mb-3 p-1">
-						<label asp-for="Grams" class="form-label"></label>
-						<input asp-for="Grams" type="number" min="0" class="text-center form-control" />
-						<span asp-validation-for="Proteins" class="text-danger"></span>
+					<div class="form-floating py-2 mb-3 p-1 col-md-6">
+							<input asp-for="Grams" type="number" min="1" class="text-center form-control" step="0.01" pattern="\d+(\.\d{1,2})?" title="Molimo unesite broj sa najviše dve decimale da je različit od 0." />
+						<label asp-for="Grams" class="form-label text-daalert-dark ms-4"></label>
+						<span asp-validation-for="Grams" class="text-danger"></span>
 
 					</div>
-					
+					</div>
 					<div class="row justify-content-center">
 						<div class="col-6 ">
 							<button type="submit" class="btn btn-primary form-control">Sačuvaj</button>

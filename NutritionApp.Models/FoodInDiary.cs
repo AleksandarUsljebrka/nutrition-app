@@ -13,7 +13,8 @@ namespace NutritionApp.Models
 		[Key]
 		public int Id {  get; set; }
 
-		[DisplayName("Količina(g)")]
+		[DisplayName("Količina (g)")]
+		[Required(ErrorMessage = "Molimo Vas unesite količinu hrane.")]
 		public float Grams { get; set; }
 
 		[DisplayName("Naziv Hrane")]
@@ -22,13 +23,13 @@ namespace NutritionApp.Models
 		[DisplayName("Tip Hrane")]
 		public string TypeOfFood { get; set; }
 
-		[DisplayName("Proteini(g)")]
+		[DisplayName("Proteini (g)")]
 		public float Proteins { get; set; }
 		
-        [DisplayName("Ugljeni Hidrati(g)")]
+        [DisplayName("Ugljeni Hidrati (g)")]
 		public float Carbs { get; set; }
 
-		[DisplayName("Masti(g)")]
+		[DisplayName("Masti (g)")]
 		public float Fat { get; set; }
 
 		[DisplayName("Kalorije(kcal)")]

@@ -10,24 +10,24 @@ namespace NutritionApp.Models
         public int Id { get; set; }
 
         [DisplayName("Naziv Hrane")]
-        [StringLength(25, MinimumLength = 2)]
-
+        [StringLength(25, MinimumLength = 2, ErrorMessage ="Naziv mora imati bar 2 i najviše 25 slova!")]
         [RegularExpression(@"^[a-zA-Z]+$", ErrorMessage = "Samo su slova dozvoljena!")]
-        [Required]
-        public string FoodName { get; set; }
+		[Required(ErrorMessage = "Molimo unesite ime hrane.")]
+		public string FoodName { get; set; }
+
         [Required]
         [DisplayName("Tip Hrane")]
         public string TypeOfFood { get; set; }
         
         [Required(ErrorMessage = "Ovo polje je obavezno!")]
-		[DisplayName("Proteini(g)")]
+		[DisplayName("Proteini (g)")]
 		public float Proteins { get; set; }
 
         [Required(ErrorMessage = "Ovo polje je obavezno!")]
-        [DisplayName("Ugljeni hidrati(g)")]
+        [DisplayName("Ugljeni hidrati (g)")]
 		public float Carbs { get; set; }
 
-		[DisplayName("Masti(g)")]
+		[DisplayName("Masti (g)")]
 		[Required(ErrorMessage = "Ovo polje je obavezno!")]
         public float Fat { get; set; }
 

@@ -24,7 +24,7 @@ namespace NutritionApp.BusinessLogic.Services
 			_userManager = userManager;
 			_httpContextAccessor = httpContextAccessor;
 		}
-		public void Add(int? foodId, float grams)
+		public void AddFoodToDiary(int? foodId, float grams)
 		{
 			var currentUser = _userManager.GetUserAsync(_httpContextAccessor.HttpContext.User).Result;
 
@@ -153,6 +153,10 @@ namespace NutritionApp.BusinessLogic.Services
 		public int GetDiaryIdByFoodId(int? id)
 		{
 			var diaryId = _unitOfWork.UserDiaryRepository.GetDiaryIdByFoodId(id);
+			if(diaryId == null)
+			{
+				return -1;
+			}
 			return diaryId;
 		}
 		public bool DeleteFoodFromDiary(int? foodId)

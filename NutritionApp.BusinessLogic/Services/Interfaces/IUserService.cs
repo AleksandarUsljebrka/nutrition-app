@@ -1,4 +1,5 @@
 ﻿using NutritionApp.Models;
+using NutritionApp.Models.AuthModels;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,6 +10,14 @@ namespace NutritionApp.BusinessLogic.Services.Interfaces
 {
 	public interface IUserService
 	{
-		public User GetUser(string username);
+
+        Task<bool> LoginAsync(LoginViewModel model);
+        Task<bool> RegisterAsync(RegisterViewModel model);
+        Task LogoutAsync();
+        Task<List<User>> GetUsersOfTypeUserAsync();
+		Task<bool> DeleteUserAsync(string userId);
+		Task<User> GetUserById(string id);
+
+
 	}
 }

@@ -9,6 +9,6 @@ namespace NutritionApp.Data.Repository.IRepository
 {
 	public interface IUserRepository : IRepository<User>
 	{
-		//public User GetUser(string username);
+		
 	}
 }

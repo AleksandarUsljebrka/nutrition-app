@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore.Metadata.Internal;
 using NutritionApp.BusinessLogic.Services;
 using NutritionApp.BusinessLogic.Services.Interfaces;
 using NutritionApp.Data.Repository.IRepository;
@@ -35,31 +36,42 @@ namespace NutritionApp.Controllers
 
 			if (foodId == null || foodId == 0)
 			{
-				return NotFound();
+				TempData["error"] = "Greška prilikom pokušaja pristupa!";
+				return RedirectToAction("Index");
 			}
 			Food? dbFood = _foodService.GetFood(foodId);
+
 			if (dbFood == null)
 			{
-				return NotFound();
+				TempData["error"] = "Greška prilikom pokušaja pristupa!";
+				return RedirectToAction("Index");
 			}
-			return View(dbFood);
+
+			AddFoodToDiaryModel newDiaryFood = 
+								new AddFoodToDiaryModel(dbFood.Id,
+														dbFood.FoodName,
+														0,
+														dbFood.Proteins,
+														dbFood.Carbs,
+														dbFood.Fat,
+														dbFood.TypeOfFood);
+
+			return View(newDiaryFood);
 		}
 		[HttpPost, ActionName("AddToDiary")]
-		public IActionResult AddToDiaryPOST(int? id)
+		public IActionResult AddToDiaryPOST(AddFoodToDiaryModel addFoodToDiaryModel)
 		{
 
-			if (id == null || id == 0)
+			if (!ModelState.IsValid)
 			{
 				TempData["error"] = "Greška prilikom dodavanja hrane!";
 
-				return NotFound();
+				return RedirectToAction("Index");
 			}
-			var grams = Request.Form["grams"];
-			if (float.TryParse(grams, out float quantity))
-			{
+			
 				
-				_diaryService.Add(id, quantity);
-			}
+			_diaryService.AddFoodToDiary(addFoodToDiaryModel.Id, addFoodToDiaryModel.Grams);
+			
 			TempData["success"] = "Hrana uspešno dodata!";
 
 			return RedirectToAction("Index");
@@ -70,12 +82,14 @@ namespace NutritionApp.Controllers
 
 			if (foodId == null || foodId == 0)
 			{
-				return NotFound();
+				TempData["error"] = "Greška prilikom pokušaja pristupa!";
+				return RedirectToAction("Index");
 			}
 			FoodInDiary? dbFood = _diaryService.GetFoodInDiary(foodId);
 			if (dbFood == null)
 			{
-				return NotFound();
+				TempData["error"] = "Greška prilikom pokušaja pristupa!";
+				return RedirectToAction("Index");
 			}
 			return View(dbFood);
 		}
@@ -83,19 +97,19 @@ namespace NutritionApp.Controllers
 		[HttpPost, ActionName("DeleteFood")]
 		public IActionResult DeleteFoodPOST(int? id)
 		{
-			//FoodInDiary? dbFoodDiary = _diaryService.GetFoodInDiary(id);
+
 			if (id == null)
 			{
 				TempData["error"] = "Greška prilikom brisanja hrane!";
 
-				return NotFound();
+				return RedirectToAction("Index");
 			}
 
 			if (!_diaryService.DeleteFoodFromDiary(id))
 			{
 				TempData["error"] = "Greška prilikom brisanja hrane!";
-
-				return NotFound();
+				
+				return RedirectToAction("Index");
 			}
 
 			TempData["success"] = "Hrana uspešno obrisana!";
@@ -109,12 +123,14 @@ namespace NutritionApp.Controllers
 
 			if (foodId == null || foodId == 0)
 			{
-				return NotFound();
+				TempData["error"] = "Greška prilikom pokušaja pristupa!";
+				return RedirectToAction("Index");
 			}
 			FoodInDiary? dbFood = _diaryService.GetFoodInDiary(foodId);
 			if (dbFood == null)
 			{
-				return NotFound();
+				TempData["error"] = "Greška prilikom pokušaja pristupa!";
+				return RedirectToAction("Index");
 			}
 			
 			return View(dbFood);
@@ -128,15 +144,15 @@ namespace NutritionApp.Controllers
 			if (id == null)
 			{
 				TempData["error"] = "Greška prilikom izmene hrane!";
-
-				return NotFound();
+				
+				return RedirectToAction("Index");
 			}
 
 			if (!_diaryService.UpdateFoodFromDiary(id, grams))
 			{
 				TempData["error"] = "Greška prilikom izmene hrane!";
 
-				return NotFound();
+				return RedirectToAction("Index");
 			}
 			
 
@@ -174,12 +190,14 @@ namespace NutritionApp.Controllers
 
 			if (foodId == null || foodId == 0)
 			{
-				return NotFound();
+				TempData["error"] = "Greška prilikom pokušaja pristupa!";
+				return RedirectToAction("AllDiaries");
 			}
 			FoodInDiary? dbFood = _diaryService.GetFoodInDiary(foodId);
 			if (dbFood == null)
 			{
-				return NotFound();
+				TempData["error"] = "Greška prilikom pokušaja pristupa!";
+				return RedirectToAction("AllDiaries");
 			}
 
 			return View(dbFood);
@@ -194,14 +212,14 @@ namespace NutritionApp.Controllers
 			{
 				TempData["error"] = "Greška prilikom izmene hrane!";
 
-				return NotFound();
+				return RedirectToAction("AllDiaries");
 			}
 
 			if (!_diaryService.UpdateFoodFromDiary(id, grams))
 			{
 				TempData["error"] = "Greška prilikom izmene hrane!";
 
-				return NotFound();
+				return RedirectToAction("AllDiaries");
 			}
 
 
@@ -210,18 +228,67 @@ namespace NutritionApp.Controllers
 			return RedirectToAction("DiaryDetails", new { id = _diaryService.GetDiaryIdByFoodId(id) });
 
 		}
+		public IActionResult DeleteHistoryFood(int? foodId)
+		{
 
+			if (foodId == null || foodId <= 0)
+			{
+				TempData["error"] = "Greška prilikom pokušaja pristupa!";
+			
+				return RedirectToAction("AllDiaries");
+			}
+			FoodInDiary? dbFood = _diaryService.GetFoodInDiary(foodId);
+			if (dbFood == null)
+			{
+				TempData["error"] = "Greška prilikom pokušaja pristupa!";
+				return RedirectToAction("AllDiaries");
+			}
+			return View(dbFood);
+		}
+
+		[HttpPost, ActionName("DeleteHistoryFood")]
+		public IActionResult DeleteHistoryFoodPOST(int? id)
+		{
+
+			if (id == null)
+			{
+				TempData["error"] = "Greška prilikom brisanja hrane!";
+				return RedirectToAction("AllDiaries");
+			}
+			var diaryid = _diaryService.GetDiaryIdByFoodId(id);
+
+			if (!_diaryService.DeleteFoodFromDiary(id))
+			{
+				TempData["error"] = "Greška prilikom brisanja hrane!";
+				
+				return RedirectToAction("AllDiaries");
+			}
+
+			if (diaryid == -1 || diaryid == null)
+			{
+				TempData["error"] = "Greška prilikom brisanja hrane!";
+
+				return RedirectToAction("AllDiaries");
+
+			}
+			TempData["success"] = "Hrana uspešno obrisana!";
+			return RedirectToAction("DiaryDetails", new { id = diaryid });
+
+
+		}
 		public IActionResult DeleteDiary(int? id)
 		{
 
 			if (id == null || id == 0)
 			{
-				return NotFound();
+				TempData["error"] = "Greška prilikom pokušaja pristupa!";
+				return RedirectToAction("AllDiaries");
 			}
 			UserDiary? diary = _diaryService.GetDiaryById(id);
 			if (diary == null)
 			{
-				return NotFound();
+				TempData["error"] = "Greška prilikom pokušaja pristupa!";
+				return RedirectToAction("AllDiaries");
 			}
 			return View(diary);
 		}
@@ -231,19 +298,19 @@ namespace NutritionApp.Controllers
 		{
 			if (id == null)
 			{
-				TempData["error"] = "Greška prilikom brisanja hrane!";
-
-				return NotFound();
+				TempData["error"] = "Greška prilikom brisanja dnevnika!";
+				
+				return RedirectToAction("AllDiaries");
 			}
 
 			if (!_diaryService.DeleteDiary(id))
 			{
-				TempData["error"] = "Greška prilikom brisanja hrane!";
-
-				return NotFound();
+				TempData["error"] = "Greška prilikom brisanja dnevnika!";
+				
+				return RedirectToAction("AllDiaries");
 			}
 
-			TempData["success"] = "Hrana uspešno obrisana!";
+			TempData["success"] = "Dnevnik uspešno obrisan!";
 			return RedirectToAction("AllDiaries");
 
 		}

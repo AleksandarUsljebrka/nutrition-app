@@ -1,6 +1,6 @@
 ﻿@model Food
 <div class="container">
-	<div class="row justify-content-center align-items-center" style="height:100vh;">
+	<div class="row justify-content-center" style="height:70vh;">
 		<div class="col-md-6">
 
 			<form method="post" class="text-center">
@@ -12,43 +12,42 @@
 						</h2>
 						<hr />
 					</div>
-					<div class=" mb-3 p-1">
-						<label asp-for="FoodName" class="form-label"></label>
-						<input asp-for="FoodName" type="text" disabled class="form-control text-center" />
-			
-					</div>
-					<div class="row mb-3 p-1">
-						<label asp-for="TypeOfFood" class="form-label"></label>
-						<select asp-for="TypeOfFood" disabled class="form-select">
-							<option class="selectpicker" value="Meso, Riba i jaja">Meso, Riba i jaja</option>
-							<option class="selectpicker" value="Mlečni proizvodi">Mlečni proizvodi</option>
-							<option class="selectpicker" value="Voće">Voće</option>
-							<option class="selectpicker" value="Povrće">Povrće</option>
-							<option class="selectpicker" value="Žitarice">Žitarice</option>
-							<option class="selectpicker" value="Mahunarke">Mahunarke</option>
-							<option class="selectpicker" value="Orašasti plodovi i semenke">Orašasti plodovi i semenke</option>
-							<option class="selectpicker" value="Ulja i masti">Ulja i masti</option>
-							<option class="selectpicker" value="Slatkiši i grickalice">Slatkiši i grickalice</option>
-							<option class="selectpicker" value="Pića">Pića</option>
-						</select>
-					</div>
-					<div class="row mb-3 p-1">
-						<label asp-for="Proteins" class="form-label"></label>
-						<input asp-for="Proteins" type="number" disabled min="0" class="text-center form-control" />
-				
+					<div class=" row mb-3 p-1">
+						<div class="form-floating py-2 col-md-6">
+							<input asp-for="FoodName" disabled type="text" class="text-center  form-control" />
+							<label asp-for="FoodName" class="form-label text-dark ms-4"></label>
+						</div>
+						<div class="form-floating py-2 col-md-6">
+							<select asp-for="TypeOfFood" disabled class="form-select">
+								<option class="selectpicker" value="Meso, Riba i jaja">Meso, Riba i jaja</option>
+								<option class="selectpicker" value="Mlečni proizvodi">Mlečni proizvodi</option>
+								<option class="selectpicker" value="Voće">Voće</option>
+								<option class="selectpicker" value="Povrće">Povrće</option>
+								<option class="selectpicker" value="Žitarice">Žitarice</option>
+								<option class="selectpicker" value="Mahunarke">Mahunarke</option>
+								<option class="selectpicker" value="Orašasti plodovi i semenke">Orašasti plodovi i semenke</option>
+								<option class="selectpicker" value="Ulja i masti">Ulja i masti</option>
+								<option class="selectpicker" value="Slatkiši i grickalice">Slatkiši i grickalice</option>
+								<option class="selectpicker" value="Pića">Pića</option>
+							</select>
+							<label asp-for="TypeOfFood" class="form-label text-dark ms-4"></label>
 
+						</div>
 					</div>
-					<div class="row mb-3 p-1">
-						<label asp-for="Carbs" class="form-label"></label>
-						<input asp-for="Carbs" type="number"  disabled min="0" class="text-center form-control" />
-				
+					<div class=" row mb-3 p-1">
 
-					</div>
-					<div class="row mb-3 p-1">
-						<label asp-for="Fat" class="form-label"></label>
-						<input asp-for="Fat" type="number"  disabled min="0" class="text-center form-control" />
-						
-
+						<div class="form-floating  py-2 col-md-4">
+							<input asp-for="Proteins" disabled type="number" min="0" class="text-center  form-control" />
+							<label asp-for="Proteins" class="form-label text-dark ms-4"></label>
+						</div>
+						<div class="form-floating py-2 col-md-4">
+							<input asp-for="Carbs" disabled ="number" min="0" class="text-center form-control" />
+							<label asp-for="Carbs" class="form-label text-dark ms-4"></label>
+						</div>
+						<div class="form-floating py-2 col-md-4">
+							<input asp-for="Fat" disabled type="number" min="0" class="text-center form-control" />
+							<label asp-for="Fat" class="form-label text-dark ms-4"></label>
+						</div>
 					</div>
 					<div class="row justify-content-center">
 						<div class="col-6 ">
@@ -63,6 +62,7 @@
 
 				</div>
 			</form>
+
 		</div>
 	</div>
 </div>

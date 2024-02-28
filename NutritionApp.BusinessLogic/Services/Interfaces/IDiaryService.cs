@@ -9,7 +9,7 @@ namespace NutritionApp.BusinessLogic.Services.Interfaces
 {
 	public interface IDiaryService
 	{
-		public void Add(int? foodId, float grams);
+		public void AddFoodToDiary(int? foodId, float grams);
 		public UserDiary GetTodaysDiary();
 		public UserDiary GetDiaryById(int? id);
 		public int GetDiaryIdByFoodId(int? id);
