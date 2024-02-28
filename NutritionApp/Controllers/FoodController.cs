@@ -19,10 +19,36 @@ namespace NutritionApp.Controllers
 		}
 		public IActionResult Index()
 		{
-			List<Food> foods = _foodService.GetAllFood();
-			return View(foods);
+			string typeOfFood = TempData["typeOfFood"] as string;
+
+			List<Food> filteredFoods = string.IsNullOrEmpty(typeOfFood) ? 
+											  _foodService.GetAllFood() : 
+											  _foodService.GetFoodByType(typeOfFood);
+
+			ViewBag.typeOfFood = typeOfFood;
+			return View(filteredFoods);
 		}
 
+		public IActionResult FilterFood(string? typeOfFood)
+		{
+			if(typeOfFood == null)
+			{
+				TempData["error"] = "Greška prilikom pristupa podacima!";
+				return RedirectToAction("Index");
+			}
+			if (typeOfFood.Equals("Sva Hrana"))
+			{
+				TempData["typeOfFood"] = "Sva Hrana";
+			}
+		
+			else
+			{
+				TempData["typeOfFood"] = typeOfFood;
+			}
+
+
+			return RedirectToAction("Index");
+		}
 
 		public IActionResult AddFood()
 		{

@@ -15,7 +15,12 @@ namespace NutritionApp.Data.Repository
         {
             
         }
-        public void Update(Food food)
+		public ICollection<Food> GetAllByType(string type)
+		{
+			return _context.Set<Food>().Where(f => f.TypeOfFood == type).ToList();
+		}
+
+		public void Update(Food food)
 		{
 			_context.Food.Update(food);
 		}

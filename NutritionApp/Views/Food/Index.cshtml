@@ -1,30 +1,52 @@
 ﻿@model List<Food>
-<div class="container ">
-	<div class="row pt-4 pb-3">
-		<div class="col-6">
-			<h2 class="text-info">
-				Sva Hrana
-			</h2>
+<div class="container">
+	<div class="row align-items-center pt-2 pb-2">
+		<div class="col-md-4">
+			<h2 class="text-info">Sva Hrana</h2>
 		</div>
-		<div class="col-6 text-end">
-			@{
-				if (User.IsInRole("Admin"))
-				{
-					<a asp-controller="Food" asp-action="AddFood" class="btn btn-primary">
-						<i class="bi bi-plus-square"></i> Nova Hrana
-					</a>
-				}
+		<div class="col-md-4 text-center">
+
+			<form method="get" action="/Food/FilterFood" class="row">
+				<div class="container row">
+					<div class="offset-md-0  col-md-6">
+						<select name="typeOfFood" class="form-select">
+							<option class="selectpicker" value="Sva Hrana" selected="@((string)ViewBag.SelectedTypeOfFood == "Sva Hrana")">Sva Hrana</option>
+							<option class="selectpicker" value="Meso, Riba i jaja" selected="@((string)ViewBag.SelectedTypeOfFood == "Meso, Riba i jaja")">Meso, Riba i jaja</option>
+							<option class="selectpicker" value="Mlečni proizvodi">Mlečni proizvodi</option>
+							<option class="selectpicker" value="Voće">Voće</option>
+							<option class="selectpicker" value="Povrće">Povrće</option>
+							<option class="selectpicker" value="Žitarice">Žitarice</option>
+							<option class="selectpicker" value="Mahunarke">Mahunarke</option>
+							<option class="selectpicker" value="Orašasti plodovi i semenke">Orašasti plodovi i semenke</option>
+							<option class="selectpicker" value="Ulja i masti">Ulja i masti</option>
+							<option class="selectpicker" value="Slatkiši i grickalice">Slatkiši i grickalice</option>
+							<option class="selectpicker" value="Pića">Pića</option>
+						</select>
+					</div>
+					<div class="col-md-6 " style="width:max-content">
+						<button type="submit" class="btn btn-primary">Filtriraj po tipu</button>
+					</div>
+				</div>
+			</form>
+		</div>
+		<div class="col-md-4 text-end">
+			@if (User.IsInRole("Admin"))
+			{
+				<a asp-controller="Food" asp-action="AddFood" class="btn btn-primary">
+					<i class="bi bi-plus-square"></i> Nova Hrana
+				</a>
 			}
 		</div>
 	</div>
+</div>
 </div>
 <div class="container">
 	<div class="row justify-content-center" style=" max-height: 400px; overflow-y: auto;">
 		<div class="col-md-8 text-center table-responsive">
 			<table class="table text-light table-secondary">
 				<thead class="table-primary">
-					
-					<tr >
+
+					<tr>
 						<th>Naziv Hrane</th>
 						<th>Tip Hrane</th>
 						<th>Proteini</th>
@@ -32,9 +54,9 @@
 						<th>Masti</th>
 						<th></th>
 					</tr>
-					
+
 				</thead>
-				<tbody >
+				<tbody>
 					@{
 						foreach (var f in Model)
 						{
@@ -49,14 +71,14 @@
 									@{
 										if (User.IsInRole("Admin"))
 										{
-											
-												<div class=" w-75 text-center justify-content-center" role="group">
-													<a asp-controller="Food" asp-action="EditFood" asp-route-foodId="@f.Id" class="btn-primary btn w-75 mx-2">
-														<i class="bi bi-pencil-square"></i> Izmeni
-													</a>
+
+											<div class=" w-75 text-center justify-content-center" role="group">
+												<a asp-controller="Food" asp-action="EditFood" asp-route-foodId="@f.Id" class="btn-primary btn w-75 mx-2">
+													<i class="bi bi-pencil-square"></i> Izmeni
+												</a>
 												<a asp-controller="Food" asp-action="DeleteFood" asp-route-foodId="@f.Id" class="btn btn-danger w-75 mx-2">
-														<i class="bi bi-trash"></i> Obriši
-													</a>
+													<i class="bi bi-trash"></i> Obriši
+												</a>
 											</div>
 
 										}
@@ -66,10 +88,10 @@
 												<a asp-controller="Diary" asp-action="AddToDiary" asp-route-foodId="@f.Id" class="btn-primary btn w-75 mx-2">
 													<i class="bi bi-plus-square"></i> Dodaj u Dnevnik
 												</a>
-												
+
 											</div>
 										}
-									}			
+									}
 								</td>
 							</tr>
 						}

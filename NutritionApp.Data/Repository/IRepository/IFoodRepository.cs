@@ -9,6 +9,7 @@ namespace NutritionApp.Data.Repository.IRepository
 {
 	public interface IFoodRepository:IRepository<Food>
 	{
+		ICollection<Food> GetAllByType(string type);
 		void Update(Food food);
 	}
 }

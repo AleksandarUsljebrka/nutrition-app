@@ -9,11 +9,12 @@ namespace NutritionApp.BusinessLogic.Services.Interfaces
 {
 	public interface IFoodService
 	{
-		public List<Food> GetAllFood();
-		public void AddFood(Food? food);
-		public Food GetFood(int? id);
-		public void UpdateFood(Food? food);
-		public void DeleteFood(Food? food);
+		List<Food> GetAllFood();
+		List<Food> GetFoodByType(string type);
+		void AddFood(Food? food);
+		Food GetFood(int? id);
+		void UpdateFood(Food? food);
+		void DeleteFood(Food? food);
 
 	}
 }

@@ -39,8 +39,27 @@ namespace NutritionApp.BusinessLogic.Services
 
 		public List<Food> GetAllFood()
 		{
-			List<Food> foods = _unitOfWork.FoodRepository.GetAll().ToList();
-			return foods;
+			var foods = _unitOfWork.FoodRepository.GetAll();
+			if(foods == null)
+			{
+				return null;
+			}
+
+			return foods.ToList();
+		}
+		public List<Food> GetFoodByType(string type)
+		{
+			IEnumerable<Food> filteredFoods = null;
+
+			if (type.Equals("Sva Hrana"))
+				filteredFoods = _unitOfWork.FoodRepository.GetAll();
+			else
+				filteredFoods = _unitOfWork.FoodRepository.GetAllByType(type);
+
+			if (filteredFoods == null)
+				return null;
+
+			return filteredFoods.ToList();
 		}
 
 		public void UpdateFood(Food? food)

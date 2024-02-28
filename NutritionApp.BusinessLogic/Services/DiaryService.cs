@@ -131,7 +131,7 @@ namespace NutritionApp.BusinessLogic.Services
         {
             var currentUser = _userManager.GetUserAsync(_httpContextAccessor.HttpContext.User).Result;
 
-            List<UserDiary> dbDiaries = _unitOfWork.UserDiaryRepository.GetAllDiariesIncludeFood(diary => diary.UserForeignKeyId == currentUser.Id).ToList();
+            var dbDiaries = _unitOfWork.UserDiaryRepository.GetAllDiariesIncludeFood(diary => diary.UserForeignKeyId == currentUser.Id);
 
             if (dbDiaries == null)
             {
@@ -139,7 +139,7 @@ namespace NutritionApp.BusinessLogic.Services
             }
 
 
-            return dbDiaries;
+            return dbDiaries.ToList();
         }
         public FoodInDiary GetFoodInDiary(int? foodId)
 		{
@@ -164,13 +164,16 @@ namespace NutritionApp.BusinessLogic.Services
 			FoodInDiary foodInDiary = _unitOfWork.FoodInDiaryRepository.Get(f => f.Id == foodId);
 			
 			if(foodInDiary == null)
-			{
 				return false;
-			}
+			
 			
 			UserDiary userDiary = _unitOfWork.UserDiaryRepository.GetDiaryIncludeFood(d => d.Id == foodInDiary.UserDiaryId);
 
+			if(userDiary == null)
+				return false;
+			
 			SubDiaryMacros(userDiary, foodInDiary);
+
 
 			if((userDiary.DailyFood.Count - 1) <= 0)
 				_unitOfWork.UserDiaryRepository.Remove(userDiary);

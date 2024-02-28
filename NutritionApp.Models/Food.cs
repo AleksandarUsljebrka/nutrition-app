@@ -10,10 +10,10 @@ namespace NutritionApp.Models
         public int Id { get; set; }
 
         [DisplayName("Naziv Hrane")]
-        [StringLength(25, MinimumLength = 2, ErrorMessage ="Naziv mora imati bar 2 i najviše 25 slova!")]
-        [RegularExpression(@"^[a-zA-Z]+$", ErrorMessage = "Samo su slova dozvoljena!")]
-		[Required(ErrorMessage = "Molimo unesite ime hrane.")]
-		public string FoodName { get; set; }
+        [StringLength(25, MinimumLength = 2, ErrorMessage = "Naziv mora imati bar 2 i najviše 25 slova!")]
+        [RegularExpression(@"^(?=.*[a-zA-Z].*[a-zA-Z])[\w\s]{2,}$", ErrorMessage = "Samo su slova dozvoljena!")]
+        [Required(ErrorMessage = "Molimo unesite ime hrane.")]
+        public string FoodName { get; set; }
 
         [Required]
         [DisplayName("Tip Hrane")]
