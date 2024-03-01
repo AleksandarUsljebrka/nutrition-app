@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Identity;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using NutritionApp.BusinessLogic.Services.Interfaces;
 using NutritionApp.Models;
@@ -61,6 +62,7 @@ namespace NutritionApp.Controllers
             return RedirectToAction("Login");
         }
 
+        [Authorize(Roles ="Admin")]
         public async Task<IActionResult> AllUsers()
         {
             List<User> users = await _userService.GetUsersOfTypeUserAsync();
@@ -70,8 +72,9 @@ namespace NutritionApp.Controllers
             }
             return View(users);
         }
+		[Authorize(Roles = "Admin")]
 
-        public async Task<IActionResult> DeleteUser(string? id)
+		public async Task<IActionResult> DeleteUser(string? id)
         {
 			if (id == null)
 			{
@@ -86,7 +89,9 @@ namespace NutritionApp.Controllers
 			}
 			return View(user);
 		}
-        [HttpPost,ActionName("DeleteUser")]
+
+        [Authorize(Roles ="Admin")]
+		[HttpPost,ActionName("DeleteUser")]
         public async Task<IActionResult> DeleteUserPOST(string? id)
         {
             if (id == null)

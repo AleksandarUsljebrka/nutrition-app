@@ -49,12 +49,14 @@ namespace NutritionApp.Controllers
 
 			return RedirectToAction("Index");
 		}
-
+		
+		[Authorize(Roles = "Admin")]
 		public IActionResult AddFood()
 		{
 			return View();
 		}
 
+		[Authorize(Roles = "Admin")]
 		[HttpPost]
 		public IActionResult AddFood(Food newFood)
 		{
@@ -70,6 +72,7 @@ namespace NutritionApp.Controllers
 			return View();
 		}
 
+		[Authorize(Roles = "Admin")]
 		public IActionResult EditFood(int? foodId)
 		{
 			if (foodId == null || foodId == 0)
@@ -88,6 +91,7 @@ namespace NutritionApp.Controllers
 			return View(dbFood);
 		}
 
+		[Authorize(Roles = "Admin")]
 		[HttpPost]
 		public IActionResult EditFood(Food editedFood)
 		{
@@ -104,6 +108,7 @@ namespace NutritionApp.Controllers
 			return View();
 		}
 
+		[Authorize(Roles = "Admin")]
 		public IActionResult DeleteFood(int? foodId)
 		{
 			if (foodId == null || foodId == 0)
@@ -121,6 +126,7 @@ namespace NutritionApp.Controllers
 			return View(dbFood);
 		}
 
+		[Authorize(Roles = "Admin")]
 		[HttpPost,ActionName("DeleteFood")]
 		public IActionResult DeleteFoodPOST(int? id)
 		{

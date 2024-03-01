@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore.Metadata.Internal;
 using NutritionApp.BusinessLogic.Services;
 using NutritionApp.BusinessLogic.Services.Interfaces;
@@ -8,7 +9,8 @@ using System.ComponentModel;
 
 namespace NutritionApp.Controllers
 {
-    public class DiaryController : Controller
+    [Authorize(Roles ="User")]
+	public class DiaryController : Controller
     {
 		private readonly IDiaryService _diaryService;
 		private readonly IFoodService _foodService;
